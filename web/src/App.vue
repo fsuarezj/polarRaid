@@ -1,13 +1,15 @@
 <template>
-  <google-map-mio></google-map-mio>
+  <openlayers-mio></openlayers-mio>
 </template>
 
 <script>
 import GoogleMap from './components/GoogleMap.vue'
+import OpenLayers from './components/OpenLayers.vue'
 
 export default {
   components: {
-    'google-map-mio': GoogleMap
+    'google-map-mio': GoogleMap,
+    'openlayers-mio': OpenLayers
   }
 }
 </script>
