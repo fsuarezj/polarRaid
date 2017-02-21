@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="Fernando Suárez">
+    <metadata>
+        <name>Test file for tracks</name>
+    </metadata>
+    <trk>
+        <name>Test Track</name>
+        <trkseg>
+            <trkpt lat="66.4549468289812" lon="25.700851678848267">
+                <ele>0.0</ele>
+                <name>Position 1</name>
+                <time>2017-02-21T00:54:46Z</time>
+            </trkpt>
+            <trkpt lat="66.47331778575936" lon="25.834747552871704">
+                <ele>0.0</ele>
+                <name>Position 2</name>
+                <time>2017-02-21T01:27:46Z</time>
+            </trkpt>
+            <trkpt lat="66.52834957027126" lon="25.91851830482483">
+                <ele>0.0</ele>
+                <name>Position 3</name>
+                <time>2017-02-21T01:58:12Z</time>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>
