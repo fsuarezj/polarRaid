@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="map">
     <ol-gpx-layer></ol-gpx-layer>
   </div>
 </template>
@@ -43,7 +43,7 @@
         }),
         controls: ol.control.defaults().extend([
           new ol.control.ScaleLine({
-            units: 'degrees'
+            units: 'metric'
           })
         ])
       });
@@ -64,8 +64,9 @@
 </script>
 
 <style scoped>
+  @import 'https://openlayers.org/en/v4.0.1/css/ol.css';
   #map {
-    height: 600px;
     width: 100%;
+    z-index: 0;
   }
 </style>
