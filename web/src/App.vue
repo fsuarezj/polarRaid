@@ -1,7 +1,13 @@
 <template>
-  <div class="container">
-    <note-header></note-header>
+  <div>
     <!-- <div class="vignete"></div> -->
+    <div class="content">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <note-header></note-header>
+        </div>
+      </div>
+    </div>
     <openlayers-mio></openlayers-mio>
   </div>
 </template>
@@ -22,31 +28,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  .container {
-    padding-left: 0px;
-    padding-right: 0px;
-    height: 100%;
-    width: 100%;
-    position: relative;
-  }
-  .vignete {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-box-shadow:
-    	inset 0 0 50px #A07244,
-      inset 0 0 50px #A07244,
-      inset 0 0 50px #A07244;
-
-    -moz-box-shadow:
-      inset 0 0 50px #A07244,
-      inset 0 0 50px #A07244;
-
-    box-shadow:
-    	inset 0 0 50px #A07244,
-      inset 0 0 50px #A07244,
-      inset 0 0 50px #A07244;
-    z-index: 1;
+<style scoped>
+  .row, .col-lg-12 {
   }
 </style>

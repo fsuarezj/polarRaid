@@ -12,7 +12,7 @@ export default {
 <style scoped>
   .note-header {
     background-image: url("http://localhost:8081/src/assets/logo_notebook.png");
-    background-size: 350px 350px;
+    background-size: contain;
     color: #DDD;
     width: 350px;
     height: 350px;
