@@ -67,6 +67,7 @@
   @import 'https://openlayers.org/en/v4.0.1/css/ol.css';
   #map {
     width: 100%;
+    height: 100%;
     z-index: 0;
   }
 </style>
