@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="gpxgenerator.com">
+<wpt lat="66.50397587210182" lon="25.725372433662415">
+    <time>2017-02-23T16:21:20Z</time>
+</wpt>
+    <wpt lat="66.50043818576843" lon="25.713897943496704">
+      <ele>53.949600</ele>
+      <time>2001-06-02T00:18:14Z</time>
+      <name>5058ROAD</name>
+      <cmt>ROAD CROSSING</cmt>
+      <desc>Road Crossing</desc>
+      <sym>Dot</sym>
+      <type>Road Crossing</type>
+    </wpt>
+</gpx>

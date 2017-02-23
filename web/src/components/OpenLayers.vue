@@ -1,21 +1,19 @@
 <template>
   <div id="map">
-    <ol-gpx-layer fitView=true></ol-gpx-layer>
+    <ol-gpx-layer fitView=false></ol-gpx-layer>
+    <ol-geojson-layer></ol-geojson-layer>
   </div>
 </template>
 
 <script>
   import ol from "openlayers"
   import OlGPXLayer from './OlGPXLayer.vue'
-
-  var source = new ol.source.Vector({
-    url: './src/assets/track.gpx',
-    format: new ol.format.GPX()
-  });
+  import OlGeojsonLayer from './OlGeojsonLayer.vue'
 
   export default {
     components: {
-      'ol-gpx-layer': OlGPXLayer
+      'ol-gpx-layer': OlGPXLayer,
+      'ol-geojson-layer' : OlGeojsonLayer
     },
     data() {
       return {
@@ -42,7 +40,8 @@
         this.layers.push(layer);
       },
       fitView(polygon) {
-        this.view.fit(polygon, {padding: [30, 0, 30, 0], constrainResolution: false});
+        this.view.fit(polygon, {padding: [50, 0, 30, 0], constrainResolution: false});
+        console.log('Acabó fitView');
       }
     },
     mounted() {
