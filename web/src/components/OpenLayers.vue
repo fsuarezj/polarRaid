@@ -1,6 +1,6 @@
 <template>
   <div id="map">
-    <ol-gpx-layer></ol-gpx-layer>
+    <ol-gpx-layer fitView=true></ol-gpx-layer>
   </div>
 </template>
 
@@ -8,23 +8,17 @@
   import ol from "openlayers"
   import OlGPXLayer from './OlGPXLayer.vue'
 
+  var source = new ol.source.Vector({
+    url: './src/assets/track.gpx',
+    format: new ol.format.GPX()
+  });
+
   export default {
     components: {
       'ol-gpx-layer': OlGPXLayer
     },
     data() {
       return {
-        layers: []
-      };
-    },
-    methods: {
-      addLayer(layer) {
-        this.layers.push(layer);
-      }
-    },
-    mounted() {
-      this.mapObject = new ol.Map({
-        target: this.$el,
         layers: [
           new ol.layer.Tile({
             source: new ol.source.Stamen({
@@ -40,16 +34,31 @@
         view: new ol.View({
           center: ol.proj.fromLonLat([26, 68.9]),
           zoom: 6
-        }),
+        })
+      };
+    },
+    methods: {
+      addLayer(layer) {
+        this.layers.push(layer);
+      },
+      fitView(polygon) {
+        this.view.fit(polygon, {padding: [30, 0, 30, 0], constrainResolution: false});
+      }
+    },
+    mounted() {
+      this.mapObject = new ol.Map({
+        target: this.$el,
+        layers: this.layers,
+        view: this.view,
         controls: ol.control.defaults().extend([
           new ol.control.ScaleLine({
             units: 'metric'
           })
         ])
       });
-      for (let layer of this.layers) {
-        this.mapObject.addLayer(layer);
-      }
+      // for (let layer of this.layers) {
+      //   this.mapObject.addLayer(layer);
+      // }
       // this.mapObject.addLayer(
         // new ol.layer.Vector({
           // source: new ol.source.Vector({
