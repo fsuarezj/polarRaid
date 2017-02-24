@@ -7,7 +7,8 @@
                "coordinates": [25.713897943496704, 66.50043818576843]
            },
            "properties": {
-               "name": "start"
+               "name": "start",
+               "type": "image"
            }
         }, {
            "type": "Feature",

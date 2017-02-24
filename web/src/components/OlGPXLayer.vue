@@ -86,7 +86,6 @@
             let feature = srcAux.getFeatures()[0];
             let polygon = feature.getGeometry();
             dad.fitView(polygon);
-            console.log('Salió de fitView');
           }
         });
       }

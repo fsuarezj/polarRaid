@@ -2,6 +2,7 @@
   <div id="map">
     <ol-gpx-layer fitView=false></ol-gpx-layer>
     <ol-geojson-layer></ol-geojson-layer>
+    <ol-overlay v-for="overlay in overlays" :dataObject="overlay"></ol-overlay>
   </div>
 </template>
 
@@ -9,11 +10,13 @@
   import ol from "openlayers"
   import OlGPXLayer from './OlGPXLayer.vue'
   import OlGeojsonLayer from './OlGeojsonLayer.vue'
+  import OlOverlay from './OlOverlay.vue'
 
   export default {
     components: {
       'ol-gpx-layer': OlGPXLayer,
-      'ol-geojson-layer' : OlGeojsonLayer
+      'ol-geojson-layer' : OlGeojsonLayer,
+      'ol-overlay': OlOverlay
     },
     data() {
       return {
@@ -32,16 +35,23 @@
         view: new ol.View({
           center: ol.proj.fromLonLat([26, 68.9]),
           zoom: 6
-        })
+        }),
+        overlays: []
       };
     },
     methods: {
       addLayer(layer) {
         this.layers.push(layer);
       },
+      addOverlay(overlay) {
+        this.mapObject.addOverlay(overlay);
+        console.log("Desde el padre después los overlays son ", this.mapObject.getOverlays())
+      },
       fitView(polygon) {
         this.view.fit(polygon, {padding: [50, 0, 30, 0], constrainResolution: false});
-        console.log('Acabó fitView');
+      },
+      clickEvent(evt) {
+        return 2;
       }
     },
     mounted() {
@@ -55,18 +65,23 @@
           })
         ])
       });
-      // for (let layer of this.layers) {
-      //   this.mapObject.addLayer(layer);
-      // }
-      // this.mapObject.addLayer(
-        // new ol.layer.Vector({
-          // source: new ol.source.Vector({
-            // url: './src/assets/geo.json',
-            // format: new ol.format.GeoJSON()
-          // }),
-          // style: lineStyle
-        // })
-      // );
+      let elem = this;
+      this.mapObject.on('click', function(evt) {
+        let feature = elem.mapObject.forEachFeatureAtPixel(evt.pixel,
+          function(feature) {
+            return feature;
+          }
+        );
+        console.log("Feature = ", feature.get('name'));
+        if (feature.get('type') === "image") {
+          let coordinates = feature.getGeometry().getCoordinates();
+          elem.overlays.push({
+            name: feature.get('name'),
+            type: feature.get('type'),
+            position: coordinates
+          });
+        }
+      });
     }
   }
 </script>

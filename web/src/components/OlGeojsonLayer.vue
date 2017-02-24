@@ -16,6 +16,7 @@
     'point': new ol.style.Style({
       image: new ol.style.Icon({
         src: './src/assets/start.png',
+        color: '#C00',
         anchor: [0.45, 0.75],
         scale: 0.5
       })

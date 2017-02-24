@@ -13,16 +13,13 @@
 </template>
 
 <script>
-import GoogleMap from './components/GoogleMap.vue'
 import OpenLayers from './components/OpenLayers.vue'
-import PrHeader from './components/PrHeader.vue'
 import NoteHeader from './components/NoteHeader.vue'
 
 export default {
   components: {
     // 'google-map-mio': GoogleMap,
     'openlayers-mio': OpenLayers,
-    'pr-header': PrHeader,
     'note-header': NoteHeader
   }
 }
