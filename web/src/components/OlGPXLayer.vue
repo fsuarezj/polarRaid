@@ -64,11 +64,8 @@
       return {
         source: new ol.source.Vector({
           url: './src/assets/track.gpx',
-          // url: 'https://openlayers.org/en/v4.0.1/examples/data/gpx/fells_loop.gpx',
           format: new ol.format.GPX()
-          // features: new ol.format.GPX({}).readFeatures('./src/assets/track.gpx'),
         }),
-        // style: style['point']
         style: style['redLineStyle']
       };
     },

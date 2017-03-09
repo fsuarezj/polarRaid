@@ -1,23 +1,38 @@
 {
-       "type": "FeatureCollection",
-       "features": [{
-           "type": "Feature",
-           "geometry": {
-               "type": "Point",
-               "coordinates": [25.713897943496704, 66.50043818576843]
-           },
-           "properties": {
-               "name": "start",
-               "type": "image"
-           }
-        }, {
-           "type": "Feature",
-           "geometry": {
-               "type": "Point",
-               "coordinates": [25.78187584877014, 71.16895866860972]
-           },
-           "properties": {
-               "name": "Cabo Norte"
-           }
-         }]
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:3857"
+    }
+  },
+  "features": [{
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [25.713897943496704, 66.50043818576843]
+    },
+    "properties": {
+      "name": "start",
+      "type": "image"
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [25.78187584877014, 71.16895866860972]
+    },
+    "properties": {
+      "name": "Cabo Norte"
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [25e5, 10e6]
+    },
+    "properties": {
+      "name": "Test"
+    }
+  }]
  }

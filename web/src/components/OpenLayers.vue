@@ -42,10 +42,15 @@
     methods: {
       addLayer(layer) {
         this.layers.push(layer);
+        // console.log("Imprimiendo features desde el padre: ", layer.getSource().getFeatures());
+        // layer.getSource().forEachFeature(f => {
+        //   console.log("Nombre: ", f.get("name"))
+        // });
+        // console.log("El estilo es: ", layer.getStyle());
       },
       addOverlay(overlay) {
         this.mapObject.addOverlay(overlay);
-        console.log("Desde el padre después los overlays son ", this.mapObject.getOverlays())
+        // console.log("Desde el padre después los overlays son ", this.mapObject.getOverlays())
       },
       fitView(polygon) {
         this.view.fit(polygon, {padding: [50, 0, 30, 0], constrainResolution: false});
@@ -55,6 +60,7 @@
       }
     },
     mounted() {
+      // console.log("Mounting Map, adding layers")
       this.mapObject = new ol.Map({
         target: this.$el,
         layers: this.layers,
@@ -65,10 +71,12 @@
           })
         ])
       });
+      // console.log("Layers: ", this.mapObject.getLayers());
       let elem = this;
       this.mapObject.on('click', function(evt) {
         let feature = elem.mapObject.forEachFeatureAtPixel(evt.pixel,
           function(feature) {
+            console.log(feature.getGeometry());
             return feature;
           }
         );

@@ -4,6 +4,7 @@
 
 <script>
   import ol from "openlayers"
+  import col from './../assets/geo.json'
 
   var style = {
     'redLineStyle' : new ol.style.Style({
@@ -21,38 +22,30 @@
         scale: 0.5
       })
     })
-    // 'point': new ol.style.Style({
-    //   image: new ol.style.Circle({
-    //     fill: new ol.style.Fill({
-    //       color: 'rgba(255,255,0,0.4)'
-    //     }),
-    //     radius: 5,
-    //     stroke: new ol.style.Stroke({
-    //       color: '#ff0',
-    //       width: 1
-    //     })
-    //   })
-    // })
   }
 
   export default {
     data() {
       return {
         source: new ol.source.Vector({
-          url: './src/assets/geo.json',
-          // url: 'https://openlayers.org/en/v4.0.1/examples/data/gpx/fells_loop.gpx',
-          format: new ol.format.GeoJSON()
-          // features: new ol.format.GPX({}).readFeatures('./src/assets/track.gpx'),
+          features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(col)
         }),
-        // style: style['point']
         style: style['point']
       };
     },
+    computed: {
+      features() {
+        return this.source.getFeatures();
+      },
+      vector() {
+        return new ol.layer.Vector({
+          source: this.source,
+          style: this.style
+        });
+      }
+    },
     mounted() {
-      this.$parent.addLayer(new ol.layer.Vector({
-        source: this.source,
-        style: this.style
-      }));
+      this.$parent.addLayer(this.vector);
     }
   }
 </script>
