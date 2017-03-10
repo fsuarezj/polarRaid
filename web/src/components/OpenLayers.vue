@@ -137,7 +137,7 @@
   #map {
     display: block;
     position: absolute;
-    z-index: -3;
+    /*z-index: 0;*/
     top: 0px;
     left: 0px;
     right: 0px;

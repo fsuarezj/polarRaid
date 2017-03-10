@@ -19,7 +19,7 @@ export default {
     margin-top: -2%;
     margin-left: -1%;
     position: fixed;
-    z-index: 10;
+    z-index: 1;
     vertical-align: middle;
     -ms-transform: rotate(-12deg); /* IE 9 */
     -webkit-transform: rotate(-12deg); /* Chrome, Safari, Opera */
