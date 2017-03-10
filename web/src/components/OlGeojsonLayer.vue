@@ -6,31 +6,25 @@
   import ol from "openlayers"
   import col from './../assets/geo.json'
 
-  var style = {
-    'redLineStyle' : new ol.style.Style({
-      stroke: new ol.style.Stroke({
-        // color: '#999',
-        color: '#C00',
-        width: 5,
-      })
+  var images = {
+    'start': new ol.style.Icon({
+      src: './src/assets/start.png',
+      color: '#C00',
+      anchor: [0.45, 0.75],
+      scale: 0.5
     }),
-    'point': new ol.style.Style({
-      image: new ol.style.Icon({
-        src: './src/assets/start.png',
-        color: '#C00',
-        anchor: [0.45, 0.75],
-        scale: 0.5
-      })
+    'start_sel': new ol.style.Icon({
+      src: './src/assets/start.png',
+      color: '#A00',
+      anchor: [0.45, 0.75],
+      scale: 0.5
     })
   }
 
   export default {
     data() {
       return {
-        source: new ol.source.Vector({
-          features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(col)
-        }),
-        style: style['point']
+        changedFeatures: []
       };
     },
     computed: {
@@ -40,11 +34,23 @@
       vector() {
         return new ol.layer.Vector({
           source: this.source,
-          style: this.style
+          // style: this.style
         });
+      },
+      source() {
+        let src = new ol.source.Vector({
+          features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(col)
+        });
+        src.forEachFeature(function(feature) {
+          feature.setStyle(new ol.style.Style({
+            image: images['start']
+          }));
+        })
+        return src;
       }
     },
     mounted() {
+      let elem = this;
       this.$parent.addLayer(this.vector);
       this.$parent.addInteraction(
         new ol.interaction.Select({
@@ -59,6 +65,41 @@
           })
         })
       );
+      this.$parent.addEventHandler('pointermove', function(evt) {
+        if (evt.dragging) {
+          return;
+        }
+        let pixel = evt.map.getEventPixel(evt.originalEvent);
+        let hit = evt.map.hasFeatureAtPixel(
+          pixel,
+          function(layer) {
+            console.log("Testing layer");
+            return true;
+        });
+        if (hit) {
+          evt.map.getTarget().style.cursor = 'pointer';
+          evt.map.forEachFeatureAtPixel(pixel,
+            function(feature, layer) {
+              feature.getStyle().setImage(images['start_sel']);
+              feature.changed();
+              elem.changedFeatures.push(feature);
+            },
+            {
+              layerFilter: layer => {
+                return layer === elem.vector;
+              },
+              hitTolerance: 5
+            }
+          );
+        } else {
+          evt.map.getTarget().style.cursor = '';
+          while (elem.changedFeatures.length) {
+            let feature = elem.changedFeatures.pop();
+            feature.getStyle().setImage(images['start']);
+            feature.changed();
+          }
+        }
+      });
     }
   }
 </script>

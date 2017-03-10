@@ -37,18 +37,7 @@
           zoom: 6
         }),
         interactions: [],
-        // interactions: new ol.interaction.defaults().extend([
-        //   new ol.interaction.Select({
-        //     style: new ol.style.Style({
-        //       image: new ol.style.Icon({
-        //         src: './src/assets/start.png',
-        //         color: '#00F',
-        //         anchor: [0.45, 0.75],
-        //         scale: 0.5
-        //       })
-        //     })
-        //   })
-        // ]),
+        eventHandlers: [],
         overlays: []
       };
     },
@@ -67,6 +56,12 @@
       addOverlay(overlay) {
         this.mapObject.addOverlay(overlay);
         // console.log("Desde el padre después los overlays son ", this.mapObject.getOverlays())
+      },
+      addEventHandler(event, callback) {
+        this.eventHandlers.push({
+          'event': event,
+          'callback': callback
+        });
       },
       fitView(polygon) {
         this.view.fit(polygon, {padding: [50, 0, 30, 0], constrainResolution: false});
@@ -116,18 +111,26 @@
       //   }
       //   let coordinate = elem.mapObject.getEventCoordinate(evt.originarlEvent);
       // });
-      this.mapObject.on('pointermove', function(evt) {
-        if (evt.dragging) {
-          return;
-        }
-        let pixel = elem.mapObject.getEventPixel(evt.originalEvent);
-        let hit = elem.mapObject.hasFeatureAtPixel(pixel);
-        if (hit) {
-          elem.mapObject.getTarget().style.cursor = 'pointer';
-        } else {
-          elem.mapObject.getTarget().style.cursor = '';
-        }
-      });
+      for (let eventHandler of this.eventHandlers) {
+        this.mapObject.on(eventHandler.event, eventHandler.callback);
+      }
+      // this.mapObject.on('pointermove', function(evt) {
+      //   if (evt.dragging) {
+      //     return;
+      //   }
+      //   let pixel = elem.mapObject.getEventPixel(evt.originalEvent);
+      //   let hit = elem.mapObject.hasFeatureAtPixel(pixel);
+      //   if (hit) {
+      //     elem.mapObject.getTarget().style.cursor = 'pointer';
+      //     elem.mapObject.forEachFeatureAtPixel(pixel, function(feature, layer) {
+      //       console.log("Style: ", feature.getStyle())
+      //       feature.getStyle().getImage().setScale(0.7);
+      //     }, {});
+      //     elem.mapObject.render();
+      //   } else {
+      //     elem.mapObject.getTarget().style.cursor = '';
+      //   }
+      // });
     }
   }
 </script>
