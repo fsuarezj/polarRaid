@@ -36,6 +36,19 @@
           center: ol.proj.fromLonLat([26, 68.9]),
           zoom: 6
         }),
+        interactions: [],
+        // interactions: new ol.interaction.defaults().extend([
+        //   new ol.interaction.Select({
+        //     style: new ol.style.Style({
+        //       image: new ol.style.Icon({
+        //         src: './src/assets/start.png',
+        //         color: '#00F',
+        //         anchor: [0.45, 0.75],
+        //         scale: 0.5
+        //       })
+        //     })
+        //   })
+        // ]),
         overlays: []
       };
     },
@@ -47,6 +60,9 @@
         //   console.log("Nombre: ", f.get("name"))
         // });
         // console.log("El estilo es: ", layer.getStyle());
+      },
+      addInteraction(interaction) {
+        this.interactions.push(interaction);
       },
       addOverlay(overlay) {
         this.mapObject.addOverlay(overlay);
@@ -72,6 +88,10 @@
         ])
       });
       // console.log("Layers: ", this.mapObject.getLayers());
+      for (let int of this.interactions) {
+        console.log("Adding ", int);
+        this.mapObject.addInteraction(int);
+      }
       let elem = this;
       this.mapObject.on('click', function(evt) {
         let feature = elem.mapObject.forEachFeatureAtPixel(evt.pixel,
@@ -88,6 +108,24 @@
             type: feature.get('type'),
             position: coordinates
           });
+        }
+      });
+      // this.mapObject.on('pointermove', function(evt) {
+      //   if (evt.dragging) {
+      //     return;
+      //   }
+      //   let coordinate = elem.mapObject.getEventCoordinate(evt.originarlEvent);
+      // });
+      this.mapObject.on('pointermove', function(evt) {
+        if (evt.dragging) {
+          return;
+        }
+        let pixel = elem.mapObject.getEventPixel(evt.originalEvent);
+        let hit = elem.mapObject.hasFeatureAtPixel(pixel);
+        if (hit) {
+          elem.mapObject.getTarget().style.cursor = 'pointer';
+        } else {
+          elem.mapObject.getTarget().style.cursor = '';
         }
       });
     }

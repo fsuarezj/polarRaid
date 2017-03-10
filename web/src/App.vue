@@ -1,13 +1,13 @@
 <template>
   <div>
     <!-- <div class="vignete"></div> -->
-    <div class="content">
+    <!-- <div class="content">
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> -->
           <note-header></note-header>
-        </div>
+        <!-- </div>
       </div>
-    </div>
+    </div> -->
     <openlayers-mio></openlayers-mio>
   </div>
 </template>
