@@ -43,6 +43,31 @@ export const eventHandlers = {
           feature.changed();
         }
       }
+    },
+    clickFunc: function(evt) {
+      let elem = this;
+      let feature = evt.map.forEachFeatureAtPixel(evt.pixel,
+        function(feature) {
+          console.log(feature.getGeometry());
+          return feature;
+        },
+        {
+          'layerFilter': function(layer) {
+            console.log("Testing layer");
+            return layer === elem.vector;
+          },
+          'hitTolerance': 9
+        }
+      );
+      console.log("Feature = ", feature.get('name'));
+      if (feature.get('type') === "image") {
+        let coordinates = feature.getGeometry().getCoordinates();
+        elem.overlays.push({
+          name: feature.get('name'),
+          type: feature.get('type'),
+          position: coordinates
+        });
+      }
     }
   }
 }

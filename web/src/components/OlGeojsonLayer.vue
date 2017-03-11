@@ -1,15 +1,20 @@
 <template>
-  <div></div>
+  <div>
+    <ol-overlay v-for="overlay in overlays" :dataObject="overlay"></ol-overlay>
+  </div>
 </template>
 
 <script>
   import ol from "openlayers"
   import col from './../assets/geo.json'
+  import OlOverlay from './OlOverlay.vue'
   import { eventHandlers } from './GeojsonEventHandlers'
-
 
   export default {
     mixins: [eventHandlers],
+    components: {
+      'ol-overlay': OlOverlay
+    },
     data() {
       return {
         styleIcons: {
@@ -25,7 +30,13 @@
             anchor: [0.45, 0.75],
             scale: 0.5
           })
-        }
+        },
+        overlays: []
+      }
+    },
+    methods: {
+      addOverlay(overlay) {
+        this.$parent.addOverlay(overlay);
       }
     },
     computed: {
@@ -52,20 +63,21 @@
     },
     mounted() {
       this.$parent.addLayer(this.vector);
-      this.$parent.addInteraction(
-        new ol.interaction.Select({
-          layers: [this.vector],
-          style: new ol.style.Style({
-            image: new ol.style.Icon({
-              src: './src/assets/start.png',
-              color: '#00F',
-              anchor: [0.45, 0.75],
-              scale: 0.5
-            })
-          })
-        })
-      );
+      // this.$parent.addInteraction(
+      //   new ol.interaction.Select({
+      //     layers: [this.vector],
+      //     style: new ol.style.Style({
+      //       image: new ol.style.Icon({
+      //         src: './src/assets/start.png',
+      //         color: '#00F',
+      //         anchor: [0.45, 0.75],
+      //         scale: 0.5
+      //       })
+      //     })
+      //   })
+      // );
       this.$parent.addEventHandler('pointermove', this.pointerMoveFunc);
+      this.$parent.addEventHandler('click', this.clickFunc);
     }
   }
 </script>

@@ -39,20 +39,6 @@
       })
     })
   }
-  // redLineStyle = new ol.style.Style({
-  //   stroke: new ol.style.Stroke({
-  //     // color: '#999',
-  //     color: '#C00',
-  //     lineDash: dashHandDrawn(),
-  //     width: 5,
-  //   })
-  // });
-  //
-  // var startPointStyle = new ol.style.Style({
-  //   image: new ol.style.Icon({
-  //     src: './src/assets/start.png'
-  //   })
-  // });
 
   export default {
     props: {

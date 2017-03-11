@@ -2,7 +2,6 @@
   <div id="map">
     <ol-gpx-layer fitView=false></ol-gpx-layer>
     <ol-geojson-layer></ol-geojson-layer>
-    <ol-overlay v-for="overlay in overlays" :dataObject="overlay"></ol-overlay>
   </div>
 </template>
 
@@ -10,13 +9,11 @@
   import ol from "openlayers"
   import OlGPXLayer from './OlGPXLayer.vue'
   import OlGeojsonLayer from './OlGeojsonLayer.vue'
-  import OlOverlay from './OlOverlay.vue'
 
   export default {
     components: {
       'ol-gpx-layer': OlGPXLayer,
       'ol-geojson-layer' : OlGeojsonLayer,
-      'ol-overlay': OlOverlay
     },
     data() {
       return {
@@ -88,29 +85,6 @@
         this.mapObject.addInteraction(int);
       }
       let elem = this;
-      this.mapObject.on('click', function(evt) {
-        let feature = elem.mapObject.forEachFeatureAtPixel(evt.pixel,
-          function(feature) {
-            console.log(feature.getGeometry());
-            return feature;
-          }
-        );
-        console.log("Feature = ", feature.get('name'));
-        if (feature.get('type') === "image") {
-          let coordinates = feature.getGeometry().getCoordinates();
-          elem.overlays.push({
-            name: feature.get('name'),
-            type: feature.get('type'),
-            position: coordinates
-          });
-        }
-      });
-      // this.mapObject.on('pointermove', function(evt) {
-      //   if (evt.dragging) {
-      //     return;
-      //   }
-      //   let coordinate = elem.mapObject.getEventCoordinate(evt.originarlEvent);
-      // });
       for (let eventHandler of this.eventHandlers) {
         this.mapObject.on(eventHandler.event, eventHandler.callback);
       }
