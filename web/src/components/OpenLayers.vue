@@ -88,23 +88,6 @@
       for (let eventHandler of this.eventHandlers) {
         this.mapObject.on(eventHandler.event, eventHandler.callback);
       }
-      // this.mapObject.on('pointermove', function(evt) {
-      //   if (evt.dragging) {
-      //     return;
-      //   }
-      //   let pixel = elem.mapObject.getEventPixel(evt.originalEvent);
-      //   let hit = elem.mapObject.hasFeatureAtPixel(pixel);
-      //   if (hit) {
-      //     elem.mapObject.getTarget().style.cursor = 'pointer';
-      //     elem.mapObject.forEachFeatureAtPixel(pixel, function(feature, layer) {
-      //       console.log("Style: ", feature.getStyle())
-      //       feature.getStyle().getImage().setScale(0.7);
-      //     }, {});
-      //     elem.mapObject.render();
-      //   } else {
-      //     elem.mapObject.getTarget().style.cursor = '';
-      //   }
-      // });
     }
   }
 </script>

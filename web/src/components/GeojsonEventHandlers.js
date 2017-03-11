@@ -15,7 +15,6 @@ export const eventHandlers = {
         pixel,
         {
           'layerFilter': function(layer) {
-            console.log("Testing layer");
             return layer === elem.vector;
           },
           'hitTolerance': 9
@@ -46,28 +45,27 @@ export const eventHandlers = {
     },
     clickFunc: function(evt) {
       let elem = this;
+      if (evt.dragging) {
+        return;
+      }
       let feature = evt.map.forEachFeatureAtPixel(evt.pixel,
         function(feature) {
-          console.log(feature.getGeometry());
-          return feature;
+          if (feature.get('type') === "image") {
+            let coordinates = feature.getGeometry().getCoordinates();
+            elem.overlays.push({
+              name: feature.get('name'),
+              type: feature.get('type'),
+              position: coordinates
+            });
+          }
         },
         {
           'layerFilter': function(layer) {
-            console.log("Testing layer");
             return layer === elem.vector;
           },
           'hitTolerance': 9
         }
       );
-      console.log("Feature = ", feature.get('name'));
-      if (feature.get('type') === "image") {
-        let coordinates = feature.getGeometry().getCoordinates();
-        elem.overlays.push({
-          name: feature.get('name'),
-          type: feature.get('type'),
-          position: coordinates
-        });
-      }
     }
   }
 }
