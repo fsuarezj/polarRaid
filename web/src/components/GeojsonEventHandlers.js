@@ -48,17 +48,9 @@ export const eventHandlers = {
       if (evt.dragging) {
         return;
       }
-      let feature = evt.map.forEachFeatureAtPixel(evt.pixel,
-        function(feature) {
-          if (feature.get('type') === "image") {
-            let coordinates = feature.getGeometry().getCoordinates();
-            elem.overlays.push({
-              name: feature.get('name'),
-              type: feature.get('type'),
-              position: coordinates
-            });
-          }
-        },
+      let pixel = evt.map.getEventPixel(evt.originalEvent);
+      let hit = evt.map.hasFeatureAtPixel(
+        pixel,
         {
           'layerFilter': function(layer) {
             return layer === elem.vector;
@@ -66,6 +58,35 @@ export const eventHandlers = {
           'hitTolerance': 9
         }
       );
+      if (hit) {
+        let feature = evt.map.forEachFeatureAtPixel(evt.pixel,
+          function(feature) {
+            let mq = window.matchMedia("(max-width: 767px)");
+            if (mq.matches) {
+              elem.$parent.createModal(feature);
+              return;
+            }
+            if (feature.get('type') === "image") {
+              console.log("Feat: ", feature)
+              // let coordinates = feature.getGeometry().getCoordinates();
+              // elem.$parent.overlays.push({
+              //   name: feature.get('name'),
+              //   type: feature.get('type'),
+              //   position: coordinates
+              // });
+              elem.$parent.overlays.push(feature);
+            }
+          },
+          {
+            'layerFilter': function(layer) {
+              return layer === elem.vector;
+            },
+            'hitTolerance': 9
+          }
+        );
+      } else {
+        elem.$parent.overlays = [];
+      }
     }
   }
 }

@@ -1,20 +1,15 @@
 <template>
   <div>
-    <ol-overlay v-for="overlay in overlays" :dataObject="overlay"></ol-overlay>
   </div>
 </template>
 
 <script>
   import ol from "openlayers"
   import col from './../assets/geo.json'
-  import OlOverlay from './OlOverlay.vue'
   import { eventHandlers } from './GeojsonEventHandlers'
 
   export default {
     mixins: [eventHandlers],
-    components: {
-      'ol-overlay': OlOverlay
-    },
     data() {
       return {
         styleIcons: {
@@ -32,11 +27,6 @@
           })
         },
         overlays: []
-      }
-    },
-    methods: {
-      addOverlay(overlay) {
-        this.$parent.addOverlay(overlay);
       }
     },
     computed: {

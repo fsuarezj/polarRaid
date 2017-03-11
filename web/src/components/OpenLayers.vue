@@ -2,6 +2,7 @@
   <div id="map">
     <ol-gpx-layer fitView=false></ol-gpx-layer>
     <ol-geojson-layer></ol-geojson-layer>
+    <ol-overlay v-for="overlay in overlays" :feature="overlay"></ol-overlay>
   </div>
 </template>
 
@@ -9,11 +10,13 @@
   import ol from "openlayers"
   import OlGPXLayer from './OlGPXLayer.vue'
   import OlGeojsonLayer from './OlGeojsonLayer.vue'
+  import OlOverlay from './OlOverlay.vue'
 
   export default {
     components: {
       'ol-gpx-layer': OlGPXLayer,
       'ol-geojson-layer' : OlGeojsonLayer,
+      'ol-overlay': OlOverlay
     },
     data() {
       return {
@@ -49,6 +52,9 @@
       },
       addInteraction(interaction) {
         this.interactions.push(interaction);
+      },
+      createModal(content) {
+        this.$emit('modalRequest', content);
       },
       addOverlay(overlay) {
         this.mapObject.addOverlay(overlay);
@@ -92,8 +98,13 @@
   }
 </script>
 
-<style scoped>
+<style>
   @import 'https://openlayers.org/en/v4.0.1/css/ol.css';
+  .ol-overlay-container {
+    width: 100%;
+    left: 0px;
+    top: 0px;
+  }
   #map {
     display: block;
     position: absolute;
