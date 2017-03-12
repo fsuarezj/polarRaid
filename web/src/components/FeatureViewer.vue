@@ -1,12 +1,8 @@
 <template lang="html">
-  <div class="">
-    <div v-if="!thumbnail" class="">
-      <p>
-        {{ feature.get('name') }}
-      </p>
-      <p>
-        {{ feature.get('type') }}
-      </p>
+  <div class="feature-viewer-container">
+    <div v-if="!thumbnail" :class="feature.get('type') + '-feature-container'">
+      <img class="image-feature" v-if="feature.get('type') === 'image'" :src="feature.get('url')">
+
     </div>
     <img class="my-thumbnail" v-if="thumbnail" :src="feature.get('url')">
   </div>
@@ -23,6 +19,11 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  computed: {
+    scrH() {
+      return window.innerHeight;
+    }
   }
 }
 </script>
@@ -32,9 +33,26 @@ export default {
     margin: 0;
     padding: 0;
   }
+  .feature-viewer-container {
+    position: relative;
+    background-color: #00F;
+  }
+
   .my-thumbnail {
     width: 300px;
     padding: 0;
     margin-bottom: 0;
+  }
+
+  .image-feature {
+    position: relative;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
   }
 </style>

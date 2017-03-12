@@ -1,25 +1,18 @@
 <template lang="html">
-  <div class="">
   <transition name="modal">
     <div class="modal-mask">
-    </div>
-  </transition>
-    <div class="modal-wrapper-outer">
       <div class="modal-wrapper">
-        <div class="modal-container-outer">
-          <!-- <div :class="modalType + '-modal'" class="modal-container"> -->
-          <div class="modal-container image-modal">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" @click="$emit('close')">&times;</button>
-            </div>
-            <div class="modal-body">
-              <slot></slot>
-            </div>
+        <div :class="modalType + '-modal'" class="modal-container">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" @click="$emit('close')">&times;</button>
+          </div>
+          <div class="modal-body">
+            <slot></slot>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -33,62 +26,36 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  div {
-    display: block;
-  }
-
-  .modal-mask, .modal-wrapper-outer, .modal-wrapper {
+<style lang="scss">
+  .modal-mask {
     position: fixed;
+    z-index: 9998;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-  }
-
-  .modal-mask {
-    z-index: 9000;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, .5);
-    display: block;
+    display: table;
     transition: opacity .3s ease;
   }
 
-  .modal-wrapper-outer {
-    z-index: 9010;
-  }
-
   .modal-wrapper {
-    // display: table-cell;
-    // vertical-align: middle;
-    position: absolute;
-    text-align: center;
+    display: table-cell;
     vertical-align: middle;
-  }
-
-  .modal-wrapper:before {
-    content: "";
-    display: inline-block;
-    color: #000;
-    height: 100%;
-    vertical-align: middle;
-  }
-
-  .modal-container-outer {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0px auto;
-    // padding: 0 1em;
-    padding: 0px;
-    box-sizing: border-box;
-    z-index: 9200;
-    text-align: left;
-    max-width: 90%;
   }
 
   .modal-container {
-    position: relative;
-    padding: 0px 5px 5px 5px;
+    max-width: 70vw;
+    margin: 0px auto;
+    padding: 3px 3px 10px 10px;
+    transition: all .3s ease;
+  }
+
+  .basic-modal {
+    background-color: #DDF;
+    font-family: Helvetica, Arial, sans-serif;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   }
 
   .image-modal {
@@ -101,7 +68,7 @@ export default {
   }
 
   .modal-body {
-    margin: 0px 0px 0px 0px;
+    margin: 0px 7px 0px 0px;
     padding: 0px;
     max-width: 100%;
     height: auto;

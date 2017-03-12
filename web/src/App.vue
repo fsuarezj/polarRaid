@@ -1,7 +1,11 @@
 <template>
   <div>
     <pr-modal-component v-if="showModal" @close="showModal = false" :modalType="modalType">
-      <feature-viewer :feature="modalContent"></feature-viewer>
+    <!-- <pr-modal-component :modalType="modalType" ref="myModal"> -->
+      <!-- <div slot="body">
+        Hola -->
+      <feature-viewer v-if="modalOpened" :feature="modalContent"></feature-viewer>
+      <!-- </div> -->
     </pr-modal-component>
     <div class="content">
       <div class="row">
@@ -29,16 +33,19 @@ export default {
   },
   data() {
     return {
-      showModal: false,
       modalType: 'basic',
-      modalContent: NaN
+      modalContent: NaN,
+      showModal: false
+      // modalOpened: false
     }
   },
   methods: {
     createModal(content) {
       this.modalContent = content;
       this.modalType = content.get('type');
+      this.modalOpened = true;
       this.showModal = true;
+      // this.$refs.myModal.openModal();
     }
   }
 }

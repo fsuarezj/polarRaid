@@ -55,6 +55,7 @@
         this.interactions.push(interaction);
       },
       createModal(content) {
+        console.log("Enviando ", content);
         this.$emit('modalRequest', content);
       },
       addOverlay(overlay) {
