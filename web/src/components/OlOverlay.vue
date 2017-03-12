@@ -1,6 +1,6 @@
 <template lang="html">
-  <div :class="feature.get('type')" class="panel" @click="requestModal">
-    <h2>{{ feature.get('name') }}</h2>
+  <div :class="feature.get('type')" class="overlay" @click="requestModal">
+    <slot></slot>
   </div>
 </template>
 
@@ -41,17 +41,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  div {
-    position: absolute;
+  div .overlay {
     background-color: #FFF;
-    padding: 5px;
+    padding: 0px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   }
   div .image {
+    padding: 8px;
   }
 
   @media screen and (min-width: 600px) {
     .estilo-molon {
-      background-color: #F00;
+      color: #F00;
     }
     div .image {
       @extend .estilo-molon;

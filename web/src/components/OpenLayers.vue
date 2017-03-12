@@ -2,7 +2,9 @@
   <div id="map">
     <ol-gpx-layer fitView=false></ol-gpx-layer>
     <ol-geojson-layer></ol-geojson-layer>
-    <ol-overlay v-for="overlay in overlays" :feature="overlay"></ol-overlay>
+    <ol-overlay v-for="overlay in overlays" :feature="overlay">
+      <feature-viewer :feature="overlay" thumbnail=true></feature-viewer>
+    </ol-overlay>
   </div>
 </template>
 
@@ -11,12 +13,14 @@
   import OlGPXLayer from './OlGPXLayer.vue'
   import OlGeojsonLayer from './OlGeojsonLayer.vue'
   import OlOverlay from './OlOverlay.vue'
+  import FeatureViewer from './FeatureViewer.vue'
 
   export default {
     components: {
       'ol-gpx-layer': OlGPXLayer,
       'ol-geojson-layer' : OlGeojsonLayer,
-      'ol-overlay': OlOverlay
+      'ol-overlay': OlOverlay,
+      FeatureViewer
     },
     data() {
       return {
@@ -100,11 +104,6 @@
 
 <style>
   @import 'https://openlayers.org/en/v4.0.1/css/ol.css';
-  .ol-overlay-container {
-    width: 100%;
-    left: 0px;
-    top: 0px;
-  }
   #map {
     display: block;
     position: absolute;

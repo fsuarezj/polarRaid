@@ -24,7 +24,8 @@
     },
     "properties": {
       "name": "start",
-      "type": "image"
+      "type": "image",
+      "url": "src/assets/foto_test.jpg"
     }
   }]
  }

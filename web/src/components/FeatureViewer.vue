@@ -1,11 +1,14 @@
 <template lang="html">
   <div class="">
-    <p>
-      {{ feature.get('name') }}
-    </p>
-    <p>
-      {{ feature.get('type') }}
-    </p>
+    <div v-if="!thumbnail" class="">
+      <p>
+        {{ feature.get('name') }}
+      </p>
+      <p>
+        {{ feature.get('type') }}
+      </p>
+    </div>
+    <img class="my-thumbnail" v-if="thumbnail" :src="feature.get('url')">
   </div>
 </template>
 
@@ -15,10 +18,23 @@ export default {
     feature: {
       type: Object,
       required: true
+    },
+    thumbnail: {
+      type: Boolean,
+      default: false
     }
   }
 }
 </script>
 
-<style lang="css">
+<style lang="scss" scoped>
+  div {
+    margin: 0;
+    padding: 0;
+  }
+  .my-thumbnail {
+    width: 300px;
+    padding: 0;
+    margin-bottom: 0;
+  }
 </style>
