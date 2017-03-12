@@ -7,7 +7,6 @@
             <button type="button" class="close" data-dismiss="modal" @click="$emit('close')">&times;</button>
           </div>
           <div class="modal-body">
-            {{ modalType }}
             <slot></slot>
           </div>
         </div>

@@ -1,6 +1,7 @@
 <template>
   <div>
     <pr-modal-component v-if="showModal" @close="showModal = false" :modalType="modalType">
+      <feature-viewer :feature="modalContent"></feature-viewer>
     </pr-modal-component>
     <div class="content">
       <div class="row">
@@ -17,18 +18,20 @@
 import OpenLayers from './components/OpenLayers.vue'
 import NoteHeader from './components/NoteHeader.vue'
 import ModalComponent from './components/ModalComponent.vue'
+import FeatureViewer from './components/FeatureViewer.vue'
 
 export default {
   components: {
     'openlayers-mio': OpenLayers,
     'note-header': NoteHeader,
-    'pr-modal-component': ModalComponent
+    'pr-modal-component': ModalComponent,
+    FeatureViewer
   },
   data() {
     return {
       showModal: false,
       modalType: 'basic',
-      modalContent: ''
+      modalContent: NaN
     }
   },
   methods: {

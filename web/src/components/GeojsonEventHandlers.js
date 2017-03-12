@@ -67,13 +67,6 @@ export const eventHandlers = {
               return;
             }
             if (feature.get('type') === "image") {
-              console.log("Feat: ", feature)
-              // let coordinates = feature.getGeometry().getCoordinates();
-              // elem.$parent.overlays.push({
-              //   name: feature.get('name'),
-              //   type: feature.get('type'),
-              //   position: coordinates
-              // });
               elem.$parent.overlays.push(feature);
             }
           },
