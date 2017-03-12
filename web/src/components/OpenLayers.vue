@@ -3,7 +3,6 @@
     <ol-gpx-layer fitView=false></ol-gpx-layer>
     <ol-geojson-layer></ol-geojson-layer>
     <ol-overlay v-for="overlay in overlays" :feature="overlay">
-      <feature-viewer :feature="overlay" thumbnail=true></feature-viewer>
     </ol-overlay>
   </div>
 </template>
@@ -13,14 +12,12 @@
   import OlGPXLayer from './OlGPXLayer.vue'
   import OlGeojsonLayer from './OlGeojsonLayer.vue'
   import OlOverlay from './OlOverlay.vue'
-  import FeatureViewer from './FeatureViewer.vue'
 
   export default {
     components: {
       'ol-gpx-layer': OlGPXLayer,
       'ol-geojson-layer' : OlGeojsonLayer,
-      'ol-overlay': OlOverlay,
-      FeatureViewer
+      'ol-overlay': OlOverlay
     },
     data() {
       return {

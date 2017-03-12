@@ -1,25 +1,35 @@
 <template lang="html">
   <div :class="feature.get('type')" class="overlay" @click="requestModal">
-    <slot></slot>
+    <feature-viewer :feature="feature" :thumbnail="thumbnail"></feature-viewer>
   </div>
 </template>
 
 <script>
 import ol from "openlayers"
-
-var getOverlayPosition = function(position) {
-  var mq = window.matchMedia("(min-width: 768px)");
-  if (mq.matches) {
-    return position;
-  } else {
-    return [0, 0];
-  }
-}
+import FeatureViewer from './FeatureViewer.vue'
 
 export default {
   props: {
     feature: {
       required: true
+    }
+  },
+  components: {
+    FeatureViewer
+  },
+  data() {
+    return {
+      thumbnail: true
+    }
+  },
+  computed: {
+    overlayWidth() {
+      if (this.feature.get('type') === 'image') {
+        return 300;
+      }
+    },
+    xPosition() {
+      return this.overlayWidth/2 + 40;
     }
   },
   methods: {
@@ -33,8 +43,9 @@ export default {
     this.$parent.addOverlay(new ol.Overlay({
       element: this.$el,
       position: this.feature.getGeometry().getCoordinates(),
-      // positioning: 'center-center',
-      offset: [-90, -70]
+      positioning: 'center-center',
+      autoPan: "true",
+      offset: [-this.xPosition, -20]
     }));
   }
 }
@@ -44,7 +55,10 @@ export default {
   div .overlay {
     background-color: #FFF;
     padding: 0px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .66);
+    -ms-transform: rotate(-5deg); /* IE 9 */
+    -webkit-transform: rotate(-5deg); /* Chrome, Safari, Opera */
+    transform: rotate(-5deg);
   }
   div .image {
     padding: 8px;
