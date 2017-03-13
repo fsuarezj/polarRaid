@@ -1,9 +1,8 @@
 <template lang="html">
-  <div class="">
   <transition name="modal">
+  <div class="modal-global-container">
     <div class="modal-mask">
     </div>
-  </transition>
     <div class="modal-wrapper-outer" @click="$emit('close')">
       <div class="modal-wrapper">
         <div class="modal-container-outer">
@@ -19,6 +18,7 @@
       </div>
     </div>
   </div>
+  </transition>
 </template>
 
 <script>
@@ -96,6 +96,15 @@ export default {
 
   .modal-container {
     position: relative;
+    .modal-header {
+      height: 0px;
+      .close {
+        color: #F00;
+        margin-top: -5%;
+        margin-right: -4%;
+        font-size: 3vw;
+      }
+    }
   }
 
   .image-modal {
@@ -105,16 +114,12 @@ export default {
     -webkit-transform: rotate(0.8deg); /* Chrome, Safari, Opera */
     transform: rotate(0.8deg);
     box-shadow: 2px 4px 4px rgba(0, 0, 0, .66);
-    .modal-header {
-      height: 0px;
-      background-color: #0F0;
-      .close {
-        color: #F00;
-        margin-top: -5%;
-        margin-right: -4%;
-        font-size: 3vw;
-      }
-    }
+  }
+
+  .souvenir-modal {
+    -ms-transform: rotate(-0.5deg); /* IE 9 */
+    -webkit-transform: rotate(-0.5deg); /* Chrome, Safari, Opera */
+    transform: rotate(-0.5deg);
   }
 
   .modal-header {
@@ -127,10 +132,6 @@ export default {
     padding: 0px;
     max-width: 100%;
     height: auto;
-  }
-
-  .modal-default-button {
-    float: right;
   }
 
   /*

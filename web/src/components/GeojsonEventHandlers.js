@@ -24,7 +24,7 @@ export const eventHandlers = {
         evt.map.getTarget().style.cursor = 'pointer';
         evt.map.forEachFeatureAtPixel(pixel,
           function(feature, layer) {
-            feature.getStyle().setImage(elem.styleIcons['start_sel']);
+            feature.getStyle().setImage(elem.styleIcons[feature.get('type') + '_sel']);
             feature.changed();
             elem.changedFeatures.push(feature);
           },
@@ -38,7 +38,7 @@ export const eventHandlers = {
         evt.map.getTarget().style.cursor = '';
         while (elem.changedFeatures.length) {
           let feature = elem.changedFeatures.pop();
-          feature.getStyle().setImage(elem.styleIcons['start']);
+          feature.getStyle().setImage(elem.styleIcons[feature.get('type')]);
           feature.changed();
         }
       }
@@ -66,8 +66,10 @@ export const eventHandlers = {
               elem.$parent.createModal(feature);
               return;
             }
-            if (feature.get('type') === "image") {
-              elem.$parent.overlays.push(feature);
+            switch (feature.get('type')) {
+              case "image":
+              case "souvenir":
+                elem.$parent.overlays.push(feature);
             }
           },
           {

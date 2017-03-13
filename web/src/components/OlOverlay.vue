@@ -24,8 +24,10 @@ export default {
   },
   computed: {
     overlayWidth() {
-      if (this.feature.get('type') === 'image') {
-        return 300;
+      switch (this.feature.get('type')) {
+        case "image":
+        case "souvenir":
+          return 300;
       }
     },
     xPosition() {
@@ -59,15 +61,23 @@ export default {
 
 <style lang="scss" scoped>
   div .overlay {
-    background-color: #FFF;
     padding: 0px;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, .66);
-    -ms-transform: rotate(random(10)-5deg); /* IE 9 */
-    transform: rotate(random(10)-5deg);
-    -webkit-transform: rotate(random(10)-5deg); /* Chrome, Safari, Opera */
   }
+
   div .image {
+    background-color: #FFF;
     padding: 8px;
+    -ms-transform: rotate(-5deg); /* IE 9 */
+    transform: rotate(-5deg);
+    -webkit-transform: rotate(-5deg); /* Chrome, Safari, Opera */
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, .66);
+  }
+
+  div .souvenir {
+    -webkit-transform: rotate(3deg); /* Chrome, Safari, Opera */
+    -ms-transform: rotate(3deg); /* IE 9 */
+    transform: rotate(3deg);
+    -webkit-filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, .66));
   }
 
   @media screen and (min-width: 600px) {

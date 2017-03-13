@@ -27,5 +27,16 @@
       "type": "image",
       "url": "src/assets/foto_test.jpg"
     }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [26.577515602111816, 67.41925605050191]
+    },
+    "properties": {
+      "name": "ticket",
+      "type": "souvenir",
+      "url": "src/assets/ticket_test.png"
+    }
   }]
  }
