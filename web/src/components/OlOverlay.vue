@@ -78,6 +78,7 @@ export default {
     -ms-transform: rotate(3deg); /* IE 9 */
     transform: rotate(3deg);
     -webkit-filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, .66));
+    filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, .66));
   }
 
   @media screen and (min-width: 600px) {

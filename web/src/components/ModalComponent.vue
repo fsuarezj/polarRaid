@@ -117,9 +117,9 @@ export default {
   }
 
   .souvenir-modal {
-    -ms-transform: rotate(-0.5deg); /* IE 9 */
-    -webkit-transform: rotate(-0.5deg); /* Chrome, Safari, Opera */
-    transform: rotate(-0.5deg);
+    -ms-transform: rotate(-1deg); /* IE 9 */
+    -webkit-transform: rotate(-1deg); /* Chrome, Safari, Opera */
+    transform: rotate(-1deg);
   }
 
   .modal-header {

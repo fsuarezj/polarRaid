@@ -4,7 +4,7 @@
       <img class="image-feature" v-if="feature.get('type') === 'image'" :src="feature.get('url')">
       <img class="souvenir-feature" v-if="feature.get('type') === 'souvenir'" :src="feature.get('url')">
     </div>
-    <img class="my-thumbnail" v-if="thumbnail" :src="feature.get('url')">
+    <img class="my-thumbnail" :class="'my-' + feature.get('type') + '-thumbnail'" v-if="thumbnail" :src="feature.get('url')">
   </div>
 </template>
 
@@ -33,9 +33,16 @@ export default {
   }
 
   .my-thumbnail {
-    width: 300px;
     padding: 0;
     margin-bottom: 0;
+  }
+
+  .my-image-thumbnail {
+    width: 300px;
+  }
+
+  .my-souvenir-thumbnail {
+    width: 250px;
   }
 
   .image-feature {
@@ -61,5 +68,6 @@ export default {
     margin: 0 auto;
     padding: 0;
     -webkit-filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, .66));
+    filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, .66));
   }
 </style>
