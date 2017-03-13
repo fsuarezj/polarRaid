@@ -4,13 +4,12 @@
     <div class="modal-mask">
     </div>
   </transition>
-    <div class="modal-wrapper-outer">
+    <div class="modal-wrapper-outer" @click="$emit('close')">
       <div class="modal-wrapper">
         <div class="modal-container-outer">
-          <!-- <div :class="modalType + '-modal'" class="modal-container"> -->
-          <div class="modal-container image-modal">
+          <div :class="modalType + '-modal'" class="modal-container">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" @click="$emit('close')">&times;</button>
+              <button type="button" class="close" data-dismiss="modal" @click="$emit('close')">{{ closeButton }}</button>
             </div>
             <div class="modal-body">
               <slot></slot>
@@ -28,6 +27,15 @@ export default {
     'modalType': {
       type: String,
       default: "basic"
+    }
+  },
+  data() {
+    return {
+      closeButton: "❌"
+    }
+  },
+  mounted() {
+    if (this.modalType === "image") {
     }
   }
 }
@@ -88,11 +96,25 @@ export default {
 
   .modal-container {
     position: relative;
-    padding: 0px 5px 5px 5px;
   }
 
   .image-modal {
-    background-color: #F00;
+    background-color: #FFF;
+    padding: 2.5%;
+    -ms-transform: rotate(0.8deg); /* IE 9 */
+    -webkit-transform: rotate(0.8deg); /* Chrome, Safari, Opera */
+    transform: rotate(0.8deg);
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, .66);
+    .modal-header {
+      height: 0px;
+      background-color: #0F0;
+      .close {
+        color: #F00;
+        margin-top: -5%;
+        margin-right: -4%;
+        font-size: 3vw;
+      }
+    }
   }
 
   .modal-header {

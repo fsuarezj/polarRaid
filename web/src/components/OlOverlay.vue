@@ -30,7 +30,13 @@ export default {
     },
     xPosition() {
       return this.overlayWidth/2 + 40;
-    }
+    },
+    // randRotation() {
+    //   return Math.random()*5 - 10;
+    // },
+    // styleRotation() {
+    //   return "ms-transform: rotate(" + this.styleRotation + "); transform: rotate(" + this.styleRotation + "); -webkit-transform: rotate(" + this.styleRotation + ");";
+    // }
   },
   methods: {
     requestModal() {
@@ -56,9 +62,9 @@ export default {
     background-color: #FFF;
     padding: 0px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, .66);
-    -ms-transform: rotate(-5deg); /* IE 9 */
-    -webkit-transform: rotate(-5deg); /* Chrome, Safari, Opera */
-    transform: rotate(-5deg);
+    -ms-transform: rotate(random(10)-5deg); /* IE 9 */
+    transform: rotate(random(10)-5deg);
+    -webkit-transform: rotate(random(10)-5deg); /* Chrome, Safari, Opera */
   }
   div .image {
     padding: 8px;

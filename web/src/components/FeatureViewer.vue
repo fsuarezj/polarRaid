@@ -19,11 +19,6 @@ export default {
       type: Boolean,
       default: false
     }
-  },
-  computed: {
-    scrH() {
-      return window.innerHeight;
-    }
   }
 }
 </script>
@@ -35,7 +30,6 @@ export default {
   }
   .feature-viewer-container {
     position: relative;
-    background-color: #00F;
   }
 
   .my-thumbnail {
@@ -49,7 +43,7 @@ export default {
     width: auto;
     height: auto;
     max-width: 100%;
-    max-height: 80vh;
+    max-height: 90vh;
     display: block;
     box-sizing: border-box;
     margin: 0 auto;
