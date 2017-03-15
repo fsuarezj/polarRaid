@@ -1,7 +1,7 @@
 <template>
   <div id="map">
     <ol-gpx-layer fitView=false></ol-gpx-layer>
-    <ol-geojson-layer></ol-geojson-layer>
+    <ol-geojson-layer @layerLoaded="cargada"></ol-geojson-layer>
     <ol-overlay v-for="overlay in overlays" :feature="overlay">
     </ol-overlay>
   </div>
@@ -45,11 +45,9 @@
     methods: {
       addLayer(layer) {
         this.layers.push(layer);
-        console.log("It's gonna add the layer");
         if (this.mapObject) {
           this.mapObject.addLayer(layer);
         }
-        console.log("called addLayer");
         // console.log("Imprimiendo features desde el padre: ", layer.getSource().getFeatures());
         // layer.getSource().forEachFeature(f => {
         //   console.log("Nombre: ", f.get("name"))
@@ -75,22 +73,26 @@
         this.mapObject.changed();
       },
       addEventHandler(event, callback) {
-        console.log("Calling addEventHandler")
         this.eventHandlers.push({
           'event': event,
           'callback': callback
         });
+        if (this.mapObject) {
+          this.mapObject.on(event, callback);
+        }
       },
       fitView(polygon) {
         this.view.fit(polygon, {padding: [50, 0, 30, 0], constrainResolution: false});
       },
       clickEvent(evt) {
         return 2;
+      },
+      cargada() {
+        console.log("Capa cargada");
       }
     },
     mounted() {
       // console.log("Mounting Map, adding layers")
-      console.log("Mounting map")
       this.mapObject = new ol.Map({
         target: this.$el,
         layers: this.layers,
@@ -102,17 +104,13 @@
         ])
       });
       // console.log("Layers: ", this.mapObject.getLayers());
-      console.log("Adding interactions");
       for (let int of this.interactions) {
-        console.log("Adding ", int);
         this.mapObject.addInteraction(int);
       }
       let elem = this;
-      console.log("Adding events");
       for (let eventHandler of this.eventHandlers) {
         this.mapObject.on(eventHandler.event, eventHandler.callback);
       }
-      console.log("Map mounted");
     }
   }
 </script>

@@ -110,19 +110,20 @@ var chufla = NaN;
       let elem = this;
       elem.jereje = geojson_featuresRef.once("value")
         .then(snapshot => {
-          console.log("Getting features snapshot");
           return snapshot;
         })
+        .catch(message => {
+          console.log("Fallando ", message);
+        })
         .then(function(snapshot) {
-          console.log("Adding layer");
           elem.geojson_features = snapshot.val();
           elem.$parent.addLayer(elem.vector);
-          console.log("Layer added");
+          elem.$parent.addEventHandler('pointermove', elem.pointerMoveFunc);
+          elem.$parent.addEventHandler('singleclick', elem.clickFunc);
+          elem.$emit('layerLoaded')
           // elem.$parent.changed();
-        });
+        })
 
-      elem.$parent.addEventHandler('pointermove', elem.pointerMoveFunc);
-      elem.$parent.addEventHandler('singleclick', elem.clickFunc);
       // this.$parent.addInteraction(
       //   new ol.interaction.Select({
       //     layers: [this.vector],
