@@ -31,6 +31,21 @@
     "type": "Feature",
     "geometry": {
       "type": "Point",
+      "coordinates": [27.118592262268066, 68.09191879737976]
+    },
+    "properties": {
+      "name": "Test text",
+      "type": "text",
+      "title": "This is the title",
+      "content": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed interdum risus, eget tempor neque. Sed sit amet pellentesque massa. Phasellus tempor nec dolor ut aliquet. In mauris dui, gravida sed est ac, eleifend bibendum dui. Mauris augue libero, gravida ac accumsan ac, ultrices sed lectus. Pellentesque aliquam blandit augue vitae sagittis. Quisque cursus pulvinar efficitur.",
+        "Phasellus eleifend egestas euismod. Donec at neque eu ante sollicitudin auctor. Aliquam semper leo vitae turpis consequat, quis lobortis dui auctor. Integer sed tellus tellus. Sed auctor dolor purus, eu gravida est porttitor molestie. Aliquam dictum velit eu turpis tempus, in mattis dui sodales. Donec fringilla nunc dui, quis accumsan mauris fermentum et. Curabitur efficitur id orci at vestibulum. Proin mattis, lacus at dapibus malesuada, quam risus sollicitudin est, sed ultrices turpis purus a nibh. Sed molestie dapibus ante, sit amet ullamcorper nisl malesuada placerat.",
+        "Phasellus sed nisl non turpis accumsan ornare. Proin tristique, purus in consequat pretium, sapien est pretium purus, ut molestie diam dolor et odio. Curabitur at nisl mi. Cras ac tristique neque, vitae suscipit leo. Sed nulla felis, tempor ac risus sit amet, maximus ullamcorper purus. Duis accumsan gravida diam, sit amet pellentesque eros rhoncus at. Mauris sagittis est felis, a tempor lectus gravida vitae. Nunc hendrerit aliquet ligula. Phasellus at accumsan quam. Suspendisse potenti. Donec fringilla ligula vel aliquam porttitor. Donec ac pellentesque justo. In eu ligula a libero placerat mattis."
+      ]
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
       "coordinates": [26.577515602111816, 67.41925605050191]
     },
     "properties": {

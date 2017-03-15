@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="box">
     <div class="note-header"></div>
+    <slot></slot>
   </div>
 </template>
 

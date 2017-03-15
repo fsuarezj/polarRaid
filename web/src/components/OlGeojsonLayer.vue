@@ -8,6 +8,23 @@
   import col from './../assets/geo.json'
   import { eventHandlers } from './GeojsonEventHandlers'
 
+import Firebase from 'firebase'
+
+let config = {
+  apiKey: "AIzaSyBrnMRULFyfa0H7mDcQ3Yb22QyJtBEHSd0",
+  authDomain: "my-vue2-firebase.firebaseapp.com",
+  databaseURL: "https://my-vue2-firebase.firebaseio.com",
+  storageBucket: "my-vue2-firebase.appspot.com",
+  messagingSenderId: "282000909832"
+};
+
+let app = Firebase.initializeApp(config);
+let db = app.database();
+let geojson_featuresRef = db.ref('geojson_features');
+let datosRef = db.ref();
+var mierdas = app.database().ref().toJSON();
+var chufla = NaN;
+
   export default {
     mixins: [eventHandlers],
     data() {
@@ -22,6 +39,18 @@
           'start_sel': new ol.style.Icon({
             src: './src/assets/start_sel.png',
             color: '#F00',
+            anchor: [0.45, 0.75],
+            scale: 0.5
+          }),
+          'text': new ol.style.Icon({
+            src: './src/assets/start.png',
+            color: '#222',
+            anchor: [0.45, 0.75],
+            scale: 0.5
+          }),
+          'text_sel': new ol.style.Icon({
+            src: './src/assets/start_sel.png',
+            color: '#666',
             anchor: [0.45, 0.75],
             scale: 0.5
           }),
@@ -50,13 +79,11 @@
             scale: 0.5
           })
         },
-        overlays: []
+        overlays: [],
+        jereje: NaN
       }
     },
     computed: {
-      features() {
-        return this.source.getFeatures();
-      },
       vector() {
         return new ol.layer.Vector({
           source: this.source,
@@ -75,8 +102,25 @@
         return src;
       }
     },
+    firebase: {
+      geojson_features: geojson_featuresRef,
+      datos: datosRef
+    },
     mounted() {
-      this.$parent.addLayer(this.vector);
+      let elem = this;
+      elem.jereje = geojson_featuresRef.once("value");
+      console.log("Jereje inside on value ", elem.jereje);
+        // elem.jereje = snapshot.val();
+        // chufla = snapshot.val();
+        // console.log("Val inside on value ", snapshot.val());
+        // console.log("Chufla inside on value ", chufla);
+        // elem.$parent.addLayer(elem.vector);
+        // elem.$parent.addEventHandler('pointermove', elem.pointerMoveFunc);
+        // elem.$parent.addEventHandler('singleclick', elem.clickFunc);
+        // console.log("It is gonna change");
+        // elem.$parent.changed();
+        // console.log("My object ", elem.jereje);
+        
       // this.$parent.addInteraction(
       //   new ol.interaction.Select({
       //     layers: [this.vector],
@@ -90,8 +134,17 @@
       //     })
       //   })
       // );
+
+      this.$parent.addLayer(this.vector);
       this.$parent.addEventHandler('pointermove', this.pointerMoveFunc);
       this.$parent.addEventHandler('singleclick', this.clickFunc);
+
+      console.log("Firebase features", this.geojson_features);
+      console.log("Datos", this.datos);
+      console.log("Firebase ref features", geojson_featuresRef.toJSON());
+      console.log("My object jereje ", this.jereje);
+      console.log("geojson from file", col);
+      console.log(mierdas);
     }
   }
 </script>

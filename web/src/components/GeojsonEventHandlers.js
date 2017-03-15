@@ -63,13 +63,20 @@ export const eventHandlers = {
           function(feature) {
             let mq = window.matchMedia("(max-width: 767px)");
             if (mq.matches) {
-              elem.$parent.createModal(feature);
-              return;
+              switch (feature.get('type')) {
+                case "image":
+                case "souvenir":
+                  elem.$parent.createModal(feature);
+                  return;
+              }
             }
             switch (feature.get('type')) {
               case "image":
               case "souvenir":
                 elem.$parent.overlays.push(feature);
+                break;
+              case "text":
+                elem.$parent.createSidetext(feature);
             }
           },
           {

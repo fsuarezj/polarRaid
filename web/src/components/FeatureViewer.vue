@@ -3,6 +3,10 @@
     <div v-if="!thumbnail" :class="feature.get('type') + '-feature-container'">
       <img class="image-feature" v-if="feature.get('type') === 'image'" :src="feature.get('url')">
       <img class="souvenir-feature" v-if="feature.get('type') === 'souvenir'" :src="feature.get('url')">
+      <div class="text-feature" v-if="feature.get('type') === 'text'">
+        <h3>{{ feature.get('title') }}</h3>
+        <p v-for="paragraph of feature.get('content')">{{ paragraph }}</p>
+      </div>
     </div>
     <img class="my-thumbnail" :class="'my-' + feature.get('type') + '-thumbnail'" v-if="thumbnail" :src="feature.get('url')">
   </div>

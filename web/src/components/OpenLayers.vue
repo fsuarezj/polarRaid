@@ -58,9 +58,17 @@
         console.log("Enviando ", content);
         this.$emit('modalRequest', content);
       },
+      createSidetext(content) {
+        this.$emit('sidenavRequest', content);
+      },
       addOverlay(overlay) {
         this.mapObject.addOverlay(overlay);
         // console.log("Desde el padre después los overlays son ", this.mapObject.getOverlays())
+      },
+      changed() {
+        console.log("Map changing");
+        this.mapObject.changed();
+        this.mapObject.render();
       },
       addEventHandler(event, callback) {
         this.eventHandlers.push({
@@ -105,7 +113,7 @@
   #map {
     display: block;
     position: absolute;
-    /*z-index: 0;*/
+    /*z-index: -1000;*/
     top: 0px;
     left: 0px;
     right: 0px;
