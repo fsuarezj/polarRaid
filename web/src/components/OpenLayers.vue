@@ -45,6 +45,11 @@
     methods: {
       addLayer(layer) {
         this.layers.push(layer);
+        console.log("It's gonna add the layer");
+        if (this.mapObject) {
+          this.mapObject.addLayer(layer);
+        }
+        console.log("called addLayer");
         // console.log("Imprimiendo features desde el padre: ", layer.getSource().getFeatures());
         // layer.getSource().forEachFeature(f => {
         //   console.log("Nombre: ", f.get("name"))
@@ -68,9 +73,9 @@
       changed() {
         console.log("Map changing");
         this.mapObject.changed();
-        this.mapObject.render();
       },
       addEventHandler(event, callback) {
+        console.log("Calling addEventHandler")
         this.eventHandlers.push({
           'event': event,
           'callback': callback
@@ -85,6 +90,7 @@
     },
     mounted() {
       // console.log("Mounting Map, adding layers")
+      console.log("Mounting map")
       this.mapObject = new ol.Map({
         target: this.$el,
         layers: this.layers,
@@ -96,14 +102,17 @@
         ])
       });
       // console.log("Layers: ", this.mapObject.getLayers());
+      console.log("Adding interactions");
       for (let int of this.interactions) {
         console.log("Adding ", int);
         this.mapObject.addInteraction(int);
       }
       let elem = this;
+      console.log("Adding events");
       for (let eventHandler of this.eventHandlers) {
         this.mapObject.on(eventHandler.event, eventHandler.callback);
       }
+      console.log("Map mounted");
     }
   }
 </script>

@@ -80,7 +80,7 @@ var chufla = NaN;
           })
         },
         overlays: [],
-        jereje: NaN
+        geojson_features: NaN
       }
     },
     computed: {
@@ -92,7 +92,7 @@ var chufla = NaN;
       source() {
         let elem = this;
         let src = new ol.source.Vector({
-          features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(col)
+          features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(this.geojson_features)
         });
         src.forEachFeature(function(feature) {
           feature.setStyle(new ol.style.Style({
@@ -108,19 +108,21 @@ var chufla = NaN;
     },
     mounted() {
       let elem = this;
-      elem.jereje = geojson_featuresRef.once("value");
-      console.log("Jereje inside on value ", elem.jereje);
-        // elem.jereje = snapshot.val();
-        // chufla = snapshot.val();
-        // console.log("Val inside on value ", snapshot.val());
-        // console.log("Chufla inside on value ", chufla);
-        // elem.$parent.addLayer(elem.vector);
-        // elem.$parent.addEventHandler('pointermove', elem.pointerMoveFunc);
-        // elem.$parent.addEventHandler('singleclick', elem.clickFunc);
-        // console.log("It is gonna change");
-        // elem.$parent.changed();
-        // console.log("My object ", elem.jereje);
-        
+      elem.jereje = geojson_featuresRef.once("value")
+        .then(snapshot => {
+          console.log("Getting features snapshot");
+          return snapshot;
+        })
+        .then(function(snapshot) {
+          console.log("Adding layer");
+          elem.geojson_features = snapshot.val();
+          elem.$parent.addLayer(elem.vector);
+          console.log("Layer added");
+          // elem.$parent.changed();
+        });
+
+      elem.$parent.addEventHandler('pointermove', elem.pointerMoveFunc);
+      elem.$parent.addEventHandler('singleclick', elem.clickFunc);
       // this.$parent.addInteraction(
       //   new ol.interaction.Select({
       //     layers: [this.vector],
@@ -135,16 +137,16 @@ var chufla = NaN;
       //   })
       // );
 
-      this.$parent.addLayer(this.vector);
-      this.$parent.addEventHandler('pointermove', this.pointerMoveFunc);
-      this.$parent.addEventHandler('singleclick', this.clickFunc);
+      // this.$parent.addLayer(this.vector);
+      // this.$parent.addEventHandler('pointermove', this.pointerMoveFunc);
+      // this.$parent.addEventHandler('singleclick', this.clickFunc);
 
-      console.log("Firebase features", this.geojson_features);
-      console.log("Datos", this.datos);
-      console.log("Firebase ref features", geojson_featuresRef.toJSON());
-      console.log("My object jereje ", this.jereje);
-      console.log("geojson from file", col);
-      console.log(mierdas);
+      // console.log("Firebase features", this.geojson_features);
+      // console.log("Datos", this.datos);
+      // console.log("Firebase ref features", geojson_featuresRef.toJSON());
+      // console.log("My object jereje ", this.jereje);
+      // console.log("geojson from file", col);
+      // console.log(mierdas);
     }
   }
 </script>
