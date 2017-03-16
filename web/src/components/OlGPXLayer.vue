@@ -48,18 +48,68 @@
     },
     data() {
       return {
-        source: new ol.source.Vector({
-          url: './src/assets/track.gpx',
-          format: new ol.format.GPX()
-        }),
         style: style['redLineStyle']
       };
     },
+    computed: {
+      vector() {
+        return new ol.layer.Vector({
+          source: this.source,
+          style: this.style
+        });
+      },
+      source() {
+        return new ol.source.Vector({
+          url: './src/assets/track.gpx',
+          format: new ol.format.GPX()
+        });
+      }
+    },
+    methods: {
+      pointerMoveFunc: function(evt) {
+        console.log("Entra");
+        let elem = this;
+        if (evt.dragging) {
+          return;
+        }
+        let pixel = evt.map.getEventPixel(evt.originalEvent);
+        let hit = evt.map.hasFeatureAtPixel(
+          pixel,
+          {
+            'layerFilter': function(layer) {
+              return layer === elem.vector;
+            },
+            'hitTolerance': 9
+          }
+        );
+        if (hit) {
+          console.log("Cambia");
+          // evt.map.getTarget().style.cursor = 'pointer'; // No pinta el pointer xq lo anulo con el on('pointermove') de la capa geojson
+          evt.map.forEachFeatureAtPixel(pixel,
+            function(feature, layer) {
+              console.log("Las keys de la feature son ", feature.getGeometry().getKeys());
+              console.log("Las properties de la feature son ", feature.getGeometry().getProperties());
+              console.log("El punto es ", evt.coordinate)
+              console.log("El punto más cercano ", feature.getGeometry().getClosestPoint(evt.coordinate));
+            },
+            {
+              layerFilter: layer => {
+                return layer === elem.vector;
+              }
+            }
+          );
+        } else {
+          evt.map.getTarget().style.cursor = '';
+          // while (elem.changedFeatures.length) {
+          //   let feature = elem.changedFeatures.pop();
+          //   feature.getStyle().setImage(elem.styleIcons[feature.get('type')]);
+          //   feature.changed();
+          // }
+        }
+      },
+    },
     mounted() {
-      this.$parent.addLayer(new ol.layer.Vector({
-        source: this.source,
-        style: this.style
-      }));
+      this.$parent.addLayer(this.vector);
       let dad = this.$parent;
       if (this.fitView) {
         // To be sure that source has been initialized
@@ -72,6 +122,7 @@
           }
         });
       }
+      this.$parent.addEventHandler('pointermove', this.pointerMoveFunc);
     }
   }
 </script>

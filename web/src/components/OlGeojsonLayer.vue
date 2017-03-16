@@ -6,27 +6,11 @@
 <script>
   import ol from "openlayers"
   import col from './../assets/geo.json'
-  import { eventHandlers } from './GeojsonEventHandlers'
-
-import Firebase from 'firebase'
-
-let config = {
-  apiKey: "AIzaSyBrnMRULFyfa0H7mDcQ3Yb22QyJtBEHSd0",
-  authDomain: "my-vue2-firebase.firebaseapp.com",
-  databaseURL: "https://my-vue2-firebase.firebaseio.com",
-  storageBucket: "my-vue2-firebase.appspot.com",
-  messagingSenderId: "282000909832"
-};
-
-let app = Firebase.initializeApp(config);
-let db = app.database();
-let geojson_featuresRef = db.ref('geojson_features');
-let datosRef = db.ref();
-var mierdas = app.database().ref().toJSON();
-var chufla = NaN;
+  import { eventHandlers } from './mixins/GeojsonEventHandlers'
+  import { firebaseDB } from './mixins/FirebaseDB.js'
 
   export default {
-    mixins: [eventHandlers],
+    mixins: [eventHandlers, firebaseDB],
     data() {
       return {
         styleIcons: {
@@ -102,13 +86,9 @@ var chufla = NaN;
         return src;
       }
     },
-    firebase: {
-      geojson_features: geojson_featuresRef,
-      datos: datosRef
-    },
     mounted() {
       let elem = this;
-      elem.jereje = geojson_featuresRef.once("value")
+      elem.jereje = this.getFirebaseRef('geojson_features').once("value")
         .then(snapshot => {
           return snapshot;
         })
