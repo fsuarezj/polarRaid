@@ -43,7 +43,8 @@
   export default {
     props: {
       fitView: {
-        defaul: false
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -67,7 +68,6 @@
     },
     methods: {
       pointerMoveFunc: function(evt) {
-        console.log("Entra");
         let elem = this;
         if (evt.dragging) {
           return;
@@ -84,20 +84,7 @@
         );
         if (hit) {
           console.log("Cambia");
-          // evt.map.getTarget().style.cursor = 'pointer'; // No pinta el pointer xq lo anulo con el on('pointermove') de la capa geojson
-          evt.map.forEachFeatureAtPixel(pixel,
-            function(feature, layer) {
-              console.log("Las keys de la feature son ", feature.getGeometry().getKeys());
-              console.log("Las properties de la feature son ", feature.getGeometry().getProperties());
-              console.log("El punto es ", evt.coordinate)
-              console.log("El punto más cercano ", feature.getGeometry().getClosestPoint(evt.coordinate));
-            },
-            {
-              layerFilter: layer => {
-                return layer === elem.vector;
-              }
-            }
-          );
+          evt.map.getTarget().style.cursor = 'pointer'; // No pinta el pointer xq lo anulo con el on('pointermove') de la capa geojson
         } else {
           evt.map.getTarget().style.cursor = '';
           // while (elem.changedFeatures.length) {
@@ -111,13 +98,17 @@
     mounted() {
       this.$parent.addLayer(this.vector);
       let dad = this.$parent;
+      console.log("FitView antes: ", this.fitView);
       if (this.fitView) {
+        console.log("FitView después: ", this.fitView);
         // To be sure that source has been initialized
         this.source.on('change', function(evt) {
+          console.log("cambia la tile");
           let srcAux = evt.target;
           if (srcAux.getState() === 'ready') {
             let feature = srcAux.getFeatures()[0];
             let polygon = feature.getGeometry();
+            console.log("El polygon es ", polygon);
             dad.fitView(polygon);
           }
         });

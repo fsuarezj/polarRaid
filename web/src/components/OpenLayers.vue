@@ -1,6 +1,7 @@
 <template>
   <div id="map">
-    <ol-gpx-layer fitView=false></ol-gpx-layer>
+    <!-- <ol-gpx-layer :fitView="shouldFitView"></ol-gpx-layer> -->
+    <pr-track-layer fitView=false></pr-track-layer>
     <pr-points-layer @layerLoaded="cargada"></pr-points-layer>
     <ol-overlay v-for="overlay in overlays" :feature="overlay">
     </ol-overlay>
@@ -11,13 +12,15 @@
   import ol from "openlayers"
   import OlGPXLayer from './OlGPXLayer.vue'
   import PointsLayer from './PointsLayer.vue'
+  import TrackLayer from './TrackLayer.vue'
   import OlOverlay from './OlOverlay.vue'
 
   export default {
     components: {
       'ol-gpx-layer': OlGPXLayer,
       'pr-points-layer' : PointsLayer,
-      'ol-overlay': OlOverlay
+      'ol-overlay': OlOverlay,
+      'pr-track-layer': TrackLayer
     },
     data() {
       return {
@@ -37,6 +40,7 @@
           center: ol.proj.fromLonLat([26, 68.9]),
           zoom: 6
         }),
+        shouldFitView: true,
         interactions: [],
         eventHandlers: [],
         overlays: []
