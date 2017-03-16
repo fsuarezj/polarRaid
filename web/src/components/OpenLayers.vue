@@ -1,7 +1,7 @@
 <template>
   <div id="map">
     <ol-gpx-layer fitView=false></ol-gpx-layer>
-    <ol-geojson-layer @layerLoaded="cargada"></ol-geojson-layer>
+    <pr-points-layer @layerLoaded="cargada"></pr-points-layer>
     <ol-overlay v-for="overlay in overlays" :feature="overlay">
     </ol-overlay>
   </div>
@@ -10,13 +10,13 @@
 <script>
   import ol from "openlayers"
   import OlGPXLayer from './OlGPXLayer.vue'
-  import OlGeojsonLayer from './OlGeojsonLayer.vue'
+  import PointsLayer from './PointsLayer.vue'
   import OlOverlay from './OlOverlay.vue'
 
   export default {
     components: {
       'ol-gpx-layer': OlGPXLayer,
-      'ol-geojson-layer' : OlGeojsonLayer,
+      'pr-points-layer' : PointsLayer,
       'ol-overlay': OlOverlay
     },
     data() {

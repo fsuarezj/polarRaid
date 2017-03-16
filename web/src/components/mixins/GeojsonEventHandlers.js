@@ -15,7 +15,7 @@ export const eventHandlers = {
         pixel,
         {
           'layerFilter': function(layer) {
-            return layer === elem.vector;
+            return layer === elem.layer;
           },
           'hitTolerance': 9
         }
@@ -30,7 +30,7 @@ export const eventHandlers = {
           },
           {
             layerFilter: layer => {
-              return layer === elem.vector;
+              return layer === elem.layer;
             }
           }
         );
@@ -53,7 +53,7 @@ export const eventHandlers = {
         pixel,
         {
           'layerFilter': function(layer) {
-            return layer === elem.vector;
+            return layer === elem.layer;
           },
           'hitTolerance': 9
         }
@@ -81,7 +81,7 @@ export const eventHandlers = {
           },
           {
             'layerFilter': function(layer) {
-              return layer === elem.vector;
+              return layer === elem.layer;
             },
             'hitTolerance': 9
           }
