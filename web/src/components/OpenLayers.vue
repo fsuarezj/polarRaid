@@ -1,7 +1,7 @@
 <template>
   <div id="map">
     <!-- <ol-gpx-layer :fitView="shouldFitView"></ol-gpx-layer> -->
-    <pr-track-layer fitView=false></pr-track-layer>
+    <pr-track-layer fitView=false @layerLoaded="cargada"></pr-track-layer>
     <pr-points-layer @layerLoaded="cargada"></pr-points-layer>
     <ol-overlay v-for="overlay in overlays" :feature="overlay">
     </ol-overlay>
@@ -48,6 +48,7 @@
     },
     methods: {
       addLayer(layer) {
+        console.log("Añadiendo capa ", layer);
         this.layers.push(layer);
         if (this.mapObject) {
           this.mapObject.addLayer(layer);

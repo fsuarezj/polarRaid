@@ -7,11 +7,11 @@
   import ol from "openlayers"
   import col from './../assets/geo.json'
   import { eventHandlers } from './mixins/GeojsonEventHandlers'
-  import { firebaseDB } from './mixins/FirebaseDB'
   import { geojsonLayerBase } from './mixins/GeojsonLayerBase'
+  import { getFirebaseRef } from './mixins/FirebaseDB'
 
   export default {
-    mixins: [eventHandlers, firebaseDB, geojsonLayerBase],
+    mixins: [eventHandlers, geojsonLayerBase],
     data() {
       return {
         styleIcons: {
@@ -70,7 +70,7 @@
     },
     mounted() {
       let elem = this;
-      elem.jereje = this.getFirebaseRef('geojson_features').once("value")
+      elem.jereje = getFirebaseRef('singularFeatures').once("value")
         .then(snapshot => {
           return snapshot;
         })

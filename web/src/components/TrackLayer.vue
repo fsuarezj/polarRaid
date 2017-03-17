@@ -7,7 +7,7 @@
   import ol from "openlayers"
   import track from './../assets/track.json'
   import { eventHandlers } from './mixins/GeojsonEventHandlers'
-  import { firebaseDB } from './mixins/FirebaseDB'
+  import { getFirebaseRef } from './mixins/FirebaseDB'
 
   function dashHandDrawn() {
     let result = [];
@@ -45,7 +45,6 @@
   }
 
   export default {
-    mixins: [firebaseDB],
     props: {
       fitView: {
         default: false
@@ -117,7 +116,7 @@
       source() {
         let elem = this;
         let src = new ol.source.Vector({
-          features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(track)
+          features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(this.features)
         });
         src.forEachFeature(function(feature) {
           feature.setStyle(elem.style);
@@ -126,11 +125,36 @@
       }
     },
     mounted() {
-      this.$parent.addLayer(this.layer);
-      let feature = this.source.getFeatures()[0];
-      let polygon = feature.getGeometry();
-      console.log("La feature es ", polygon);
-      this.$parent.fitView(polygon);
+      let elem = this;
+      console.log("Montando track");
+      getFirebaseRef('original_track').once("value")
+        .then(snapshot => {
+          return snapshot;
+        })
+        .catch(message => {
+          console.log("Fallando ", message);
+        })
+        .then(function(snapshot) {
+          console.log("Coge el track ", snapshot.val())
+          elem.features = snapshot.val();
+          elem.$parent.addLayer(elem.layer);
+
+          let feature = elem.source.getFeatures()[0];
+          let polygon = feature.getGeometry();
+          console.log("La feature es ", polygon);
+          elem.$parent.fitView(polygon);
+
+          elem.$emit('layerLoaded');
+        })
+        .catch(message => {
+          console.log("Fallando 2", message);
+        })
+      // this.$parent.addLayer(this.layer);
+      // let feature = this.source.getFeatures()[0];
+      // let polygon = feature.getGeometry();
+      // console.log("La feature es ", polygon);
+      // this.$parent.fitView(polygon);
+
       // let elem = this;
       // elem.jereje = this.getFirebaseRef('geojson_features').once("value")
       //   .then(snapshot => {
