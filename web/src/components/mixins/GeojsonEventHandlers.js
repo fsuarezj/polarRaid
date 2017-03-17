@@ -24,6 +24,7 @@ export const eventHandlers = {
         evt.map.getTarget().style.cursor = 'pointer';
         evt.map.forEachFeatureAtPixel(pixel,
           function(feature, layer) {
+            // console.log("Seleccionando del tipo ", feature.get('type'));
             feature.getStyle().setImage(elem.styleIcons[feature.get('type') + '_sel']);
             feature.changed();
             elem.changedFeatures.push(feature);
@@ -38,6 +39,7 @@ export const eventHandlers = {
         evt.map.getTarget().style.cursor = '';
         while (elem.changedFeatures.length) {
           let feature = elem.changedFeatures.pop();
+          // console.log("Deleccionando del tipo ", feature.get('type'));
           feature.getStyle().setImage(elem.styleIcons[feature.get('type')]);
           feature.changed();
         }
@@ -65,6 +67,7 @@ export const eventHandlers = {
             if (mq.matches) {
               switch (feature.get('type')) {
                 case "image":
+                case "start":
                 case "souvenir":
                   elem.$parent.createModal(feature);
                   return;
@@ -72,6 +75,7 @@ export const eventHandlers = {
             }
             switch (feature.get('type')) {
               case "image":
+              case "start":
               case "souvenir":
                 elem.$parent.overlays.push(feature);
                 break;

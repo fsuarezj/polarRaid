@@ -5,7 +5,6 @@
 
 <script>
   import ol from "openlayers"
-  import track from './../assets/track.json'
   import { eventHandlers } from './mixins/GeojsonEventHandlers'
   import { getFirebaseRef } from './mixins/FirebaseDB'
 
@@ -149,27 +148,6 @@
         .catch(message => {
           console.log("Fallando 2", message);
         })
-      // this.$parent.addLayer(this.layer);
-      // let feature = this.source.getFeatures()[0];
-      // let polygon = feature.getGeometry();
-      // console.log("La feature es ", polygon);
-      // this.$parent.fitView(polygon);
-
-      // let elem = this;
-      // elem.jereje = this.getFirebaseRef('geojson_features').once("value")
-      //   .then(snapshot => {
-      //     return snapshot;
-      //   })
-      //   .catch(message => {
-      //     console.log("Fallando ", message);
-      //   })
-      //   .then(function(snapshot) {
-      //     elem.features = snapshot.val();
-      //     elem.$parent.addLayer(elem.layer);
-      //     elem.$parent.addEventHandler('pointermove', elem.pointerMoveFunc);
-      //     elem.$parent.addEventHandler('singleclick', elem.clickFunc);
-      //     elem.$emit('layerLoaded')
-      //   })
     }
       // this.$parent.addInteraction(
       //   new ol.interaction.Select({

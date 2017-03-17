@@ -10,14 +10,12 @@
 
 <script>
   import ol from "openlayers"
-  import OlGPXLayer from './OlGPXLayer.vue'
   import PointsLayer from './PointsLayer.vue'
   import TrackLayer from './TrackLayer.vue'
   import OlOverlay from './OlOverlay.vue'
 
   export default {
     components: {
-      'ol-gpx-layer': OlGPXLayer,
       'pr-points-layer' : PointsLayer,
       'ol-overlay': OlOverlay,
       'pr-track-layer': TrackLayer
@@ -48,7 +46,6 @@
     },
     methods: {
       addLayer(layer) {
-        console.log("Añadiendo capa ", layer);
         this.layers.push(layer);
         if (this.mapObject) {
           this.mapObject.addLayer(layer);
@@ -63,7 +60,6 @@
         this.interactions.push(interaction);
       },
       createModal(content) {
-        console.log("Enviando ", content);
         this.$emit('modalRequest', content);
       },
       createSidetext(content) {
@@ -74,7 +70,6 @@
         // console.log("Desde el padre después los overlays son ", this.mapObject.getOverlays())
       },
       changed() {
-        console.log("Map changing");
         this.mapObject.changed();
       },
       addEventHandler(event, callback) {
