@@ -12,7 +12,7 @@ export default {
 
 <style lang="scss" scoped>
   .box {
-    background-image: url("http://localhost:8081/src/assets/logo_notebook.png");
+    background-image: url("http://localhost:8080/src/assets/logo_notebook.png");
     background-size: contain;
     color: #DDD;
     width: 20%;
