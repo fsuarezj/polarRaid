@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="Fernando Suárez">
+    <metadata>
+        <name>Test file for tracks</name>
+    </metadata>
+    <trk>
+        <name>Test Track</name>
+        <trkseg>
+            <trkpt lat="66.50043818576843" lon="25.713897943496704">
+              <time>2017-02-23T02:52:11Z</time>
+              <name>Rovaniemi</name>
+            </trkpt>
+            <trkpt lat="66.62801508252728" lon="26.199066638946533">
+              <time>2017-02-23T07:58:22Z</time>
+            </trkpt>
+            <trkpt lat="66.73456264967976" lon="26.275970935821533">
+              <time>2017-02-23T10:25:02Z</time>
+            </trkpt>
+            <trkpt lat="66.88921229802133" lon="26.183960437774658">
+              <time>2017-02-23T13:55:16Z</time>
+            </trkpt>
+            <trkpt lat="67.10289116942599" lon="26.626954078674316">
+              <time>2017-02-23T19:59:17Z</time>
+            </trkpt>
+            <trkpt lat="67.41925605050191" lon="26.577515602111816">
+              <time>2017-02-24T02:58:48Z</time>
+            </trkpt>
+            <trkpt lat="67.58111909153152" lon="26.747803688049316">
+              <time>2017-02-24T06:49:46Z</time>
+            </trkpt>
+            <trkpt lat="67.94799921972437" lon="26.758790016174316">
+              <time>2017-02-24T14:55:25Z</time>
+            </trkpt>
+            <trkpt lat="68.09191879737976" lon="27.118592262268066">
+              <time>2017-02-24T19:16:18Z</time>
+            </trkpt>
+            <trkpt lat="68.19519151535428" lon="27.099366188049316">
+              <time>2017-02-24T21:33:19Z</time>
+            </trkpt>
+            <trkpt lat="68.53341824394255" lon="27.533326148986816">
+              <time>2017-02-25T05:48:35Z</time>
+            </trkpt>
+            <trkpt lat="68.7892681939758" lon="27.398743629455566">
+              <time>2017-02-25T11:33:23Z</time>
+            </trkpt>
+            <trkpt lat="68.90621740113932" lon="27.038941383361816">
+              <time>2017-02-25T15:24:40Z</time>
+              <name>Inari</name>
+            </trkpt>
+            <trkpt lat="68.9476947023307" lon="26.945557594299316">
+              <time>2017-02-23T04:08:48Z</time>
+            </trkpt>
+            <trkpt lat="69.13827185138126" lon="27.228455543518066">
+              <time>2017-02-23T08:54:24Z</time>
+            </trkpt>
+            <trkpt lat="69.2378100279821" lon="26.832947731018066">
+              <time>2017-02-23T12:42:20Z</time>
+            </trkpt>
+            <trkpt lat="69.46444955032251" lon="25.522828102111816">
+              <time>2017-02-24T00:03:28Z</time>
+              <name>Karasjok</name>
+            </trkpt>
+            <trkpt lat="69.82935466544124" lon="25.138306617736816">
+              <time>2017-02-24T08:37:54Z</time>
+            </trkpt>
+            <trkpt lat="70.05261688848871" lon="24.951539039611816">
+              <time>2017-02-24T13:45:21Z</time>
+              <name>Lakselv</name>
+            </trkpt>
+            <trkpt lat="70.09513437314223" lon="24.915039539337158">
+              <time>2017-02-23T04:07:16Z</time>
+            </trkpt>
+            <trkpt lat="70.2321395112977" lon="24.935638904571533">
+              <time>2017-02-23T07:08:51Z</time>
+            </trkpt>
+            <trkpt lat="70.29520939119682" lon="25.072968006134033">
+              <time>2017-02-23T08:52:28Z</time>
+            </trkpt>
+            <trkpt lat="70.47867313404464" lon="25.218536853790283">
+              <time>2017-02-23T13:03:46Z</time>
+            </trkpt>
+            <trkpt lat="70.47316563820858" lon="25.067474842071533">
+              <time>2017-02-23T14:10:59Z</time>
+            </trkpt>
+            <trkpt lat="70.8789604625507" lon="25.821411609649658">
+              <time>2017-02-24T00:41:30Z</time>
+            </trkpt>
+            <trkpt lat="70.89264078331962" lon="25.681625604629517">
+              <time>2017-02-24T01:44:44Z</time>
+            </trkpt>
+            <trkpt lat="70.95233858323476" lon="25.70977807044983">
+              <time>2017-02-24T03:04:41Z</time>
+            </trkpt>
+            <trkpt lat="70.99039720551121" lon="25.74342370033264">
+              <time>2017-02-24T03:57:06Z</time>
+            </trkpt>
+            <trkpt lat="71.00133597732582" lon="25.965355038642883">
+              <time>2017-02-24T05:33:51Z</time>
+            </trkpt>
+            <trkpt lat="70.98165510686131" lon="25.97119152545929">
+              <time>2017-02-24T06:00:01Z</time>
+              <name>Honningsvag</name>
+            </trkpt>
+            <trkpt lat="71.00915814309866" lon="25.95368206501007">
+              <time>2017-02-23T03:40:45Z</time>
+            </trkpt>
+            <trkpt lat="71.00994018905942" lon="25.895660519599915">
+              <time>2017-02-23T04:05:45Z</time>
+            </trkpt>
+            <trkpt lat="71.0489088871403" lon="25.758529901504517">
+              <time>2017-02-23T05:24:07Z</time>
+            </trkpt>
+            <trkpt lat="71.09123246258606" lon="25.78118920326233">
+              <time>2017-02-23T06:20:58Z</time>
+            </trkpt>
+            <trkpt lat="71.1128046349701" lon="25.69604516029358">
+              <time>2017-02-23T07:07:18Z</time>
+            </trkpt>
+            <trkpt lat="71.16895866860972" lon="25.78187584877014">
+              <time>2017-02-23T08:30:12Z</time>
+              <name>Cabo Norte</name>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>
