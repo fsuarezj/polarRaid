@@ -112,6 +112,11 @@
           source: this.source,
         });
       },
+      layer2() {
+        return new ol.layer.Vector({
+          source: this.source2,
+        });
+      },
       source() {
         let elem = this;
         let src = new ol.source.Vector({
@@ -120,6 +125,16 @@
         src.forEachFeature(function(feature) {
           feature.setStyle(elem.style);
         })
+        return src;
+      },
+      source2() {
+        let elem = this;
+        let src = new ol.source.Vector({
+          features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(this.pointsTrack)
+        });
+        // src.forEachFeature(function(feature) {
+        //   feature.setStyle(elem.style);
+        // })
         return src;
       }
     },
@@ -142,6 +157,24 @@
           let polygon = feature.getGeometry();
           console.log("La feature es ", polygon);
           elem.$parent.fitView(polygon);
+
+          elem.$emit('layerLoaded');
+        })
+        .catch(message => {
+          console.log("Fallando 2", message);
+        })
+
+      getFirebaseRef('pointsTrack').once("value")
+        .then(snapshot => {
+          return snapshot;
+        })
+        .catch(message => {
+          console.log("Fallando ", message);
+        })
+        .then(function(snapshot) {
+          console.log("Coge los pointsTrack ", snapshot.val())
+          elem.pointsTrack = snapshot.val();
+          elem.$parent.addLayer(elem.layer2);
 
           elem.$emit('layerLoaded');
         })
