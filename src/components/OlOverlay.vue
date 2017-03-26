@@ -26,6 +26,7 @@ export default {
     overlayWidth() {
       switch (this.feature.get('type')) {
         case "image":
+        case "start":
         case "souvenir":
           return 300;
       }
@@ -64,7 +65,7 @@ export default {
     padding: 0px;
   }
 
-  div .image {
+  div .image, div .start {
     background-color: #FFF;
     padding: 8px;
     -ms-transform: rotate(-5deg); /* IE 9 */

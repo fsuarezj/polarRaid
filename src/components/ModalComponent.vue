@@ -107,7 +107,7 @@ export default {
     }
   }
 
-  .image-modal {
+  .image-modal, .start-modal {
     background-color: #FFF;
     padding: 2.5%;
     -ms-transform: rotate(0.8deg); /* IE 9 */

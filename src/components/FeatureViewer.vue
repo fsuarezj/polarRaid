@@ -2,6 +2,7 @@
   <div class="feature-viewer-container">
     <div v-if="!thumbnail" :class="feature.get('type') + '-feature-container'">
       <img class="image-feature" v-if="feature.get('type') === 'image'" :src="feature.get('url')">
+      <img class="start-feature" v-if="feature.get('type') === 'start'" :src="feature.get('url')">
       <img class="souvenir-feature" v-if="feature.get('type') === 'souvenir'" :src="feature.get('url')">
       <div class="text-feature" v-if="feature.get('type') === 'text'">
         <h3>{{ feature.get('title') }}</h3>
@@ -41,7 +42,7 @@ export default {
     margin-bottom: 0;
   }
 
-  .my-image-thumbnail {
+  .my-image-thumbnail, .my-start-thumbnail {
     width: 300px;
   }
 
@@ -49,7 +50,7 @@ export default {
     width: 250px;
   }
 
-  .image-feature {
+  .image-feature, .start-feature {
     position: relative;
     width: auto;
     height: auto;
