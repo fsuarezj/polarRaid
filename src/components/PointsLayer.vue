@@ -89,6 +89,7 @@
               feature.getStyle().setImage(elem.styleIcons[feature.get('type') + '_sel']);
               feature.changed();
             }, function(feature) {
+              console.log("Ejecutando mouseOut para la feature ", feature)
               feature.getStyle().setImage(elem.styleIcons[feature.get('type')]);
               feature.changed();
             }
