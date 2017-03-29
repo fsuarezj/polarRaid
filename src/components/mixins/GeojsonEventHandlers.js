@@ -27,7 +27,12 @@ export const eventHandlers = {
             // console.log("Seleccionando del tipo ", feature.get('type'));
             feature.getStyle().setImage(elem.styleIcons[feature.get('type') + '_sel']);
             feature.changed();
-            elem.changedFeatures.push(feature);
+            elem.changedFeatures.push({
+              "feature": feature,
+              "revertChange": function(feat) {
+                feat.getStyle().setImage(elem.styleIcons[feat.get('type')]);
+              }
+            });
           },
           {
             layerFilter: layer => {

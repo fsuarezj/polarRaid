@@ -5,7 +5,6 @@
 
 <script>
   import ol from "openlayers"
-  import { eventHandlers } from './mixins/GeojsonEventHandlers'
   import { getFirebaseRef } from './mixins/FirebaseDB'
 
   function dashHandDrawn() {

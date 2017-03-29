@@ -1,7 +1,7 @@
 <template>
   <div id="map">
     <!-- <ol-gpx-layer :fitView="shouldFitView"></ol-gpx-layer> -->
-    <pr-track-layer fitView=false @layerLoaded="cargada"></pr-track-layer>
+    <!-- <pr-track-layer fitView=false @layerLoaded="cargada"></pr-track-layer> -->
     <pr-points-layer @layerLoaded="cargada"></pr-points-layer>
     <ol-overlay v-for="overlay in overlays" :feature="overlay">
     </ol-overlay>
@@ -11,14 +11,16 @@
 <script>
   import ol from "openlayers"
   import PointsLayer from './PointsLayer.vue'
-  import TrackLayer from './TrackLayer.vue'
+  // import TrackLayer from './TrackLayer.vue'
   import OlOverlay from './OlOverlay.vue'
+  import { eventHandlers } from './mixins/EventHandlers'
 
   export default {
+    mixins: [eventHandlers],
     components: {
       'pr-points-layer' : PointsLayer,
-      'ol-overlay': OlOverlay,
-      'pr-track-layer': TrackLayer
+      'ol-overlay': OlOverlay
+      // 'pr-track-layer': TrackLayer
     },
     data() {
       return {
@@ -72,15 +74,15 @@
       changed() {
         this.mapObject.changed();
       },
-      addEventHandler(event, callback) {
-        this.eventHandlers.push({
-          'event': event,
-          'callback': callback
-        });
-        if (this.mapObject) {
-          this.mapObject.on(event, callback);
-        }
-      },
+      // addEventHandler(event, callback) {
+      //   this.eventHandlers.push({
+      //     'event': event,
+      //     'callback': callback
+      //   });
+      //   if (this.mapObject) {
+      //     this.mapObject.on(event, callback);
+      //   }
+      // },
       fitView(polygon) {
         this.view.fit(polygon, {padding: [50, 0, 30, 0], constrainResolution: false});
       },
@@ -107,10 +109,11 @@
       for (let int of this.interactions) {
         this.mapObject.addInteraction(int);
       }
-      let elem = this;
-      for (let eventHandler of this.eventHandlers) {
-        this.mapObject.on(eventHandler.event, eventHandler.callback);
-      }
+      // let elem = this;
+      // for (let eventHandler of this.eventHandlers) {
+      //   this.mapObject.on(eventHandler.event, eventHandler.callback);
+      // }
+      this.mapObject.on('pointermove', this.pointerMoveFunc)
     }
   }
 </script>
