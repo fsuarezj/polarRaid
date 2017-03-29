@@ -6,12 +6,12 @@
 <script>
   import ol from "openlayers"
   import col from './../assets/geo.json'
-  import { eventHandlers } from './mixins/GeojsonEventHandlers'
+  // import { eventHandlers } from './mixins/GeojsonEventHandlers'
   import { geojsonLayerBase } from './mixins/GeojsonLayerBase'
   import { getFirebaseRef } from './mixins/FirebaseDB'
 
   export default {
-    mixins: [eventHandlers, geojsonLayerBase],
+    mixins: [geojsonLayerBase],
     data() {
       return {
         styleIcons: {
@@ -80,8 +80,19 @@
         .then(function(snapshot) {
           elem.features = snapshot.val();
           elem.$parent.addLayer(elem.layer);
-          elem.$parent.addEventHandler('pointermove', elem.pointerMoveFunc);
-          elem.$parent.addEventHandler('singleclick', elem.clickFunc);
+          // elem.$parent.addEventHandler('pointermove', elem.pointerMoveFunc);
+          // elem.$parent.addEventHandler('singleclick', elem.clickFunc);
+          elem.$parent.addActiveLayer(
+            elem.layer,
+            function(feature) {
+              console.log("Ejecutando mouseOver para la feature ", feature)
+              feature.getStyle().setImage(elem.styleIcons[feature.get('type') + '_sel']);
+              feature.changed();
+            }, function(feature) {
+              feature.getStyle().setImage(elem.styleIcons[feature.get('type')]);
+              feature.changed();
+            }
+          )
           elem.$emit('layerLoaded')
         })
     }
