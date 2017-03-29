@@ -27,12 +27,15 @@ export const eventHandlers = {
         evt.map.forEachFeatureAtPixel(pixel,
           function(feature, layer) {
             // console.log("Seleccionando del tipo ", feature.get('type'));
-            console.log("Intentando ejecutar mouseOver")
-            elem.activeLayers[layer].mouseOverCallback(feature)
-            elem.mouseOverFeatures.push({
-              'feature': feature,
-              'revertChange': elem.activeLayers[layer].mouseOutCallback(feature)
-            });
+            if (elem.activeLayers[layer].mouseOverCallback) {
+              elem.activeLayers[layer].mouseOverCallback(feature)
+              if (elem.activeLayers[layer].mouseOverCallback) {
+                elem.mouseOverFeatures.push({
+                  'feature': feature,
+                  'revertChange': elem.activeLayers[layer].mouseOutCallback(feature)
+                });
+              }
+            }
           },
           {
             layerFilter: layer => {

@@ -85,11 +85,14 @@
           elem.$parent.addActiveLayer(
             elem.layer,
             function(feature) {
-              console.log("Ejecutando mouseOver para la feature ", feature)
-              feature.getStyle().setImage(elem.styleIcons[feature.get('type') + '_sel']);
+              console.log("Ejecutando mouseOverCallback para la feature ", feature)
+              console.log(feature.getStyle())
+              feature.getStyle().setImage(elem.styleIcons[feature.get('type') + '_sel'])
+              console.log(feature.getStyle())
+              console.log("se supone que ha cambiado el logo")
               feature.changed();
+              console.log(feature.getStyle())
             }, function(feature) {
-              console.log("Ejecutando mouseOut para la feature ", feature)
               feature.getStyle().setImage(elem.styleIcons[feature.get('type')]);
               feature.changed();
             }
