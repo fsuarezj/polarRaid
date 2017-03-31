@@ -106,8 +106,8 @@
         ])
       });
       // console.log("Layers: ", this.mapObject.getLayers());
-      for (let int of this.interactions) {
-        this.mapObject.addInteraction(int);
+      for (let inter of this.interactions) {
+        this.mapObject.addInteraction(inter);
       }
       // let elem = this;
       // for (let eventHandler of this.eventHandlers) {

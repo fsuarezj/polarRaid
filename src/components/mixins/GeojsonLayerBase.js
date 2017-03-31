@@ -15,6 +15,7 @@ export const geojsonLayerBase = {
       src.forEachFeature(function(feature) {
         feature.setStyle(new ol.style.Style({
           image: elem.styleIcons[feature.get('type')]
+          // image: elem.styleIcons['image']
         }));
       })
       return src;

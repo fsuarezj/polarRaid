@@ -29,10 +29,10 @@ export const eventHandlers = {
             // console.log("Seleccionando del tipo ", feature.get('type'));
             if (elem.activeLayers[layer].mouseOverCallback) {
               elem.activeLayers[layer].mouseOverCallback(feature)
-              if (elem.activeLayers[layer].mouseOverCallback) {
+              if (elem.activeLayers[layer].mouseOutCallback) {
                 elem.mouseOverFeatures.push({
                   'feature': feature,
-                  'revertChange': elem.activeLayers[layer].mouseOutCallback(feature)
+                  'revertChange': elem.activeLayers[layer].mouseOutCallback
                 });
               }
             }
@@ -48,7 +48,7 @@ export const eventHandlers = {
         while (elem.mouseOverFeatures.length) {
           let aux_feat = elem.mouseOverFeatures.pop();
           // console.log("Deleccionando del tipo ", feature.get('type'));
-          aux_feat.revertChange;
+          aux_feat.revertChange(aux_feat.feature);
         }
       }
     },
@@ -57,6 +57,7 @@ export const eventHandlers = {
         'mouseOverCallback': mouseOverCallback,
         'mouseOutCallback': mouseOutCallback
       }
+      console.log("active layers: ", this.activeLayers)
     }
     // clickFunc: function(evt) {
     //   let elem = this;
