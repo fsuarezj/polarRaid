@@ -12,6 +12,11 @@
 
   export default {
     mixins: [geojsonLayerBase],
+    props: {
+      layerId: {
+        required: true
+      }
+    },
     data() {
       return {
         styleIcons: {
@@ -81,6 +86,7 @@
           elem.features = snapshot.val();
           elem.$parent.addLayer(elem.layer);
           elem.$parent.addActiveLayer({
+            layerId: elem.layer.get('layerId'),
             layer: elem.layer,
             mouseOverCallback: function(feature) {
               feature.getStyle().setImage(elem.styleIcons[feature.get('type') + '_sel'])

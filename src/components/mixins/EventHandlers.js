@@ -15,6 +15,18 @@ export const eventHandlers = {
       }
       return false
     },
+    addActiveLayer(layerProps) {
+      if (layerProps.layerId in this.activeLayers) {
+        console.error('layerId already used')
+      } else {
+        this.activeLayers[layerProps.layerId] = {
+          'layer': layerProps.layer,
+          'mouseOverCallback': layerProps.mouseOverCallback,
+          'mouseOutCallback': layerProps.mouseOutCallback,
+          'clickCallback': layerProps.clickCallback
+        }
+      }
+    },
     pointerMoveFunc: function(evt) {
       let elem = this;
       if (evt.dragging) {
@@ -25,7 +37,7 @@ export const eventHandlers = {
         pixel,
         {
           'layerFilter': function(layer) {
-            return elem.activeLayers.hasOwnProperty(layer);
+            return layer.get('layerId') in elem.activeLayers;
           },
           'hitTolerance': elem.hitTolerance
         }
@@ -35,13 +47,13 @@ export const eventHandlers = {
         evt.map.forEachFeatureAtPixel(pixel,
           function(feature, layer) {
             // console.log("Seleccionando del tipo ", feature.get('type'));
-            if (elem.activeLayers[layer].mouseOverCallback) {
+            if (elem.activeLayers[layer.get('layerId')].mouseOverCallback) {
               if (!elem.mouseIsAlreadyOver(feature)) {
-                elem.activeLayers[layer].mouseOverCallback(feature)
-                if (elem.activeLayers[layer].mouseOutCallback) {
+                elem.activeLayers[layer.get('layerId')].mouseOverCallback(feature)
+                if (elem.activeLayers[layer.get('layerId')].mouseOutCallback) {
                     elem.mouseOverFeatures.push({
                       'feature': feature,
-                      'revertChange': elem.activeLayers[layer].mouseOutCallback
+                      'revertChange': elem.activeLayers[layer.get('layerId')].mouseOutCallback
                     });
                   }
               }
@@ -49,7 +61,7 @@ export const eventHandlers = {
           },
           {
             layerFilter: layer => {
-              return elem.activeLayers.hasOwnProperty(layer);
+              return layer.get('layerId') in elem.activeLayers;
             }
           }
         );
@@ -60,14 +72,6 @@ export const eventHandlers = {
           // console.log("Deleccionando del tipo ", feature.get('type'));
           aux_feat.revertChange(aux_feat.feature);
         }
-      }
-    },
-    // addActiveLayer(layer, mouseOverCallback, mouseOutCallback, clickCallback) {
-    addActiveLayer(layerProps) {
-      this.activeLayers[layerProps.layer] = {
-        'mouseOverCallback': layerProps.mouseOverCallback,
-        'mouseOutCallback': layerProps.mouseOutCallback,
-        'clickCallback': layerProps.clickCallback
       }
     },
     clickFunc: function(evt) {
@@ -90,13 +94,13 @@ export const eventHandlers = {
       evt.map.forEachFeatureAtPixel(pixel,
         function(feature, layer) {
           hit = true
-          if (elem.activeLayers[layer].clickCallback) {
-              elem.activeLayers[layer].clickCallback(feature)
+          if (elem.activeLayers[layer.get('layerId')].clickCallback) {
+              elem.activeLayers[layer.get('layerId')].clickCallback(feature)
           }
         },
         {
           layerFilter: layer => {
-            return elem.activeLayers.hasOwnProperty(layer);
+            return layer.get('layerId') in elem.activeLayers;
           },
           'hitTolerance': elem.hitTolerance
         }

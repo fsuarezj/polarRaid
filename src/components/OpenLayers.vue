@@ -1,8 +1,8 @@
 <template>
   <div id="map">
     <!-- <ol-gpx-layer :fitView="shouldFitView"></ol-gpx-layer> -->
-    <!-- <pr-track-layer fitView=false @layerLoaded="cargada"></pr-track-layer> -->
-    <pr-points-layer @layerLoaded="cargada"></pr-points-layer>
+    <pr-track-layer fitView=false @layerLoaded="cargada"></pr-track-layer>
+    <pr-points-layer @layerLoaded="cargada" layerId="pointsLayer"></pr-points-layer>
     <ol-overlay v-for="overlay in overlays" :feature="overlay">
     </ol-overlay>
   </div>
@@ -11,7 +11,7 @@
 <script>
   import ol from "openlayers"
   import PointsLayer from './PointsLayer.vue'
-  // import TrackLayer from './TrackLayer.vue'
+  import TrackLayer from './TrackLayer.vue'
   import OlOverlay from './OlOverlay.vue'
   import { eventHandlers } from './mixins/EventHandlers'
 
@@ -19,8 +19,8 @@
     mixins: [eventHandlers],
     components: {
       'pr-points-layer' : PointsLayer,
-      'ol-overlay': OlOverlay
-      // 'pr-track-layer': TrackLayer
+      'ol-overlay': OlOverlay,
+      'pr-track-layer': TrackLayer
     },
     data() {
       return {

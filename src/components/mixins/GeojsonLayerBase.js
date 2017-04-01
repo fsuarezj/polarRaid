@@ -5,6 +5,7 @@ export const geojsonLayerBase = {
     layer() {
       return new ol.layer.Vector({
         source: this.source,
+        layerId: this.layerId
       });
     },
     source() {
