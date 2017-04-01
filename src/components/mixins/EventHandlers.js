@@ -7,6 +7,14 @@ export const eventHandlers = {
     };
   },
   methods: {
+    mouseIsAlreadyOver: function(feature) {
+      for (let i of this.mouseOverFeatures) {
+        if (feature === i['feature']) {
+          return true
+        }
+      }
+      return false
+    },
     pointerMoveFunc: function(evt) {
       let elem = this;
       if (evt.dragging) {
@@ -28,12 +36,14 @@ export const eventHandlers = {
           function(feature, layer) {
             // console.log("Seleccionando del tipo ", feature.get('type'));
             if (elem.activeLayers[layer].mouseOverCallback) {
-              elem.activeLayers[layer].mouseOverCallback(feature)
-              if (elem.activeLayers[layer].mouseOutCallback) {
-                elem.mouseOverFeatures.push({
-                  'feature': feature,
-                  'revertChange': elem.activeLayers[layer].mouseOutCallback
-                });
+              if (!elem.mouseIsAlreadyOver(feature)) {
+                elem.activeLayers[layer].mouseOverCallback(feature)
+                if (elem.activeLayers[layer].mouseOutCallback) {
+                    elem.mouseOverFeatures.push({
+                      'feature': feature,
+                      'revertChange': elem.activeLayers[layer].mouseOutCallback
+                    });
+                  }
               }
             }
           },
@@ -57,7 +67,6 @@ export const eventHandlers = {
         'mouseOverCallback': mouseOverCallback,
         'mouseOutCallback': mouseOutCallback
       }
-      console.log("active layers: ", this.activeLayers)
     }
     // clickFunc: function(evt) {
     //   let elem = this;

@@ -86,11 +86,9 @@
             elem.layer,
             function(feature) {
               feature.getStyle().setImage(elem.styleIcons[feature.get('type') + '_sel'])
-              console.log('MouseOverCall')
               feature.changed();
             }, function(feature) {
               feature.getStyle().setImage(elem.styleIcons[feature.get('type')]);
-              console.log('MouseOutCall')
               feature.changed();
             }
           )
