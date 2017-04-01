@@ -6,6 +6,7 @@
 <script>
   import ol from "openlayers"
   import { getFirebaseRef } from './mixins/FirebaseDB'
+  import gjt from 'geojson-tools'
 
   function dashHandDrawn() {
     let result = [];
@@ -51,7 +52,7 @@
     data() {
       return {
         overlays: [],
-        features: NaN,
+        track: NaN,
         style: style['redLineStyle']
       }
     },
@@ -69,7 +70,7 @@
       source() {
         let elem = this;
         let src = new ol.source.Vector({
-          features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(this.features)
+          features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(this.track)
         });
         src.forEachFeature(function(feature) {
           feature.setStyle(elem.style);
@@ -89,46 +90,36 @@
     },
     mounted() {
       let elem = this;
-      console.log("Montando track");
-      getFirebaseRef('original_track').once("value")
-        .then(snapshot => {
-          return snapshot;
-        })
-        .catch(message => {
-          console.log("Fallando ", message);
-        })
-        .then(function(snapshot) {
-          console.log("Coge el track ", snapshot.val())
-          elem.features = snapshot.val();
-          elem.$parent.addLayer(elem.layer);
-
-          let feature = elem.source.getFeatures()[0];
-          let polygon = feature.getGeometry();
-          console.log("La feature es ", polygon);
-          elem.$parent.fitView(polygon);
-
-          elem.$emit('layerLoaded');
-        })
-        .catch(message => {
-          console.log("Fallando 2", message);
-        })
 
       getFirebaseRef('pointsTrack').once("value")
         .then(snapshot => {
           return snapshot;
         })
         .catch(message => {
-          console.log("Fallando ", message);
+          console.error("Error when getting points from Firebase", message);
         })
         .then(function(snapshot) {
-          console.log("Coge los pointsTrack ", snapshot.val())
           elem.pointsTrack = snapshot.val();
+          // Draws linestring track
+          let pointsCoordinates = []
+          for (let point of elem.pointsTrack.features) {
+            pointsCoordinates.push(gjt.toArray(point.geometry))
+          }
+          elem.track = gjt.toGeoJSON(pointsCoordinates, 'LineString')
+          elem.$parent.addLayer(elem.layer);
+
+          // Fits the screen to the track
+          let feature = elem.source.getFeatures()[0];
+          let polygon = feature.getGeometry();
+          elem.$parent.fitView(polygon);
+
+          // Draws the pointsTrack layer
           elem.$parent.addLayer(elem.layer2);
 
           elem.$emit('layerLoaded');
         })
         .catch(message => {
-          console.log("Fallando 2", message);
+          console.error("Error when drawing points layer", message);
         })
     }
       // this.$parent.addInteraction(
