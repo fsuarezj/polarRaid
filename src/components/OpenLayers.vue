@@ -69,7 +69,9 @@
       },
       addOverlay(overlay) {
         this.mapObject.addOverlay(overlay);
-        // console.log("Desde el padre después los overlays son ", this.mapObject.getOverlays())
+      },
+      deleteOverlays() {
+        this.overlays = []
       },
       changed() {
         this.mapObject.changed();
@@ -114,6 +116,7 @@
       //   this.mapObject.on(eventHandler.event, eventHandler.callback);
       // }
       this.mapObject.on('pointermove', this.pointerMoveFunc)
+      this.mapObject.on('click', this.clickFunc)
     }
   }
 </script>

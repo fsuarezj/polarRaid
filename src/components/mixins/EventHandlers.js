@@ -62,27 +62,49 @@ export const eventHandlers = {
         }
       }
     },
-    addActiveLayer(layer, mouseOverCallback, mouseOutCallback) {
-      this.activeLayers[layer] = {
-        'mouseOverCallback': mouseOverCallback,
-        'mouseOutCallback': mouseOutCallback
+    // addActiveLayer(layer, mouseOverCallback, mouseOutCallback, clickCallback) {
+    addActiveLayer(layerProps) {
+      this.activeLayers[layerProps.layer] = {
+        'mouseOverCallback': layerProps.mouseOverCallback,
+        'mouseOutCallback': layerProps.mouseOutCallback,
+        'clickCallback': layerProps.clickCallback
       }
-    }
-    // clickFunc: function(evt) {
-    //   let elem = this;
-    //   if (evt.dragging) {
-    //     return;
-    //   }
-    //   let pixel = evt.map.getEventPixel(evt.originalEvent);
-    //   let hit = evt.map.hasFeatureAtPixel(
-    //     pixel,
-    //     {
-    //       'layerFilter': function(layer) {
-    //         return layer === elem.layer;
-    //       },
-    //       'hitTolerance': 9
-    //     }
-    //   );
+    },
+    clickFunc: function(evt) {
+      let elem = this;
+      if (evt.dragging) {
+        return;
+      }
+      let pixel = evt.map.getEventPixel(evt.originalEvent);
+      // let hit = evt.map.hasFeatureAtPixel(
+      //   pixel,
+      //   {
+      //     'layerFilter': function(layer) {
+      //       return elem.activeLayers.hasOwnProperty(layer);
+      //     },
+      //     'hitTolerance': elem.hitTolerance
+      //   }
+      // );
+      // if (hit) {
+      let hit = false
+      evt.map.forEachFeatureAtPixel(pixel,
+        function(feature, layer) {
+          hit = true
+          if (elem.activeLayers[layer].clickCallback) {
+              elem.activeLayers[layer].clickCallback(feature)
+          }
+        },
+        {
+          layerFilter: layer => {
+            return elem.activeLayers.hasOwnProperty(layer);
+          },
+          'hitTolerance': elem.hitTolerance
+        }
+      );
+      if (!hit) {
+        this.overlays = []
+      }
+      // }
     //   if (hit) {
     //     let feature = evt.map.forEachFeatureAtPixel(evt.pixel,
     //       function(feature) {
@@ -116,6 +138,6 @@ export const eventHandlers = {
     //   } else {
     //     elem.$parent.overlays = [];
     //   }
-    // }
+    }
   }
 }

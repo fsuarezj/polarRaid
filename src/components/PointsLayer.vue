@@ -80,18 +80,39 @@
         .then(function(snapshot) {
           elem.features = snapshot.val();
           elem.$parent.addLayer(elem.layer);
-          // elem.$parent.addEventHandler('pointermove', elem.pointerMoveFunc);
-          // elem.$parent.addEventHandler('singleclick', elem.clickFunc);
-          elem.$parent.addActiveLayer(
-            elem.layer,
-            function(feature) {
+          elem.$parent.addActiveLayer({
+            layer: elem.layer,
+            mouseOverCallback: function(feature) {
               feature.getStyle().setImage(elem.styleIcons[feature.get('type') + '_sel'])
               feature.changed();
-            }, function(feature) {
+            },
+            mouseOutCallback: function(feature) {
               feature.getStyle().setImage(elem.styleIcons[feature.get('type')]);
               feature.changed();
+            },
+            clickCallback: function(feature) {
+              console.log("Clicking")
+              let mq = window.matchMedia("(max-width: 767px)");
+              if (mq.matches) {
+                switch (feature.get('type')) {
+                  case "image":
+                  case "start":
+                  case "souvenir":
+                    elem.$parent.createModal(feature);
+                    return;
+                }
+              }
+              switch (feature.get('type')) {
+                case "image":
+                case "start":
+                case "souvenir":
+                elem.$parent.overlays.push(feature);
+                break;
+                case "text":
+                elem.$parent.createSidetext(feature);
+              }
             }
-          )
+          })
           elem.$emit('layerLoaded')
         })
     }
