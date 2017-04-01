@@ -20,29 +20,6 @@
     return result;
   }
 
-  var style = {
-    'redLineStyle' : new ol.style.Style({
-      stroke: new ol.style.Stroke({
-        // color: '#999',
-        color: '#C00',
-        lineDash: dashHandDrawn(),
-        width: 5,
-      })
-    }),
-    'point': new ol.style.Style({
-      image: new ol.style.Circle({
-        fill: new ol.style.Fill({
-          color: 'rgba(255,255,0,0.4)'
-        }),
-        radius: 5,
-        stroke: new ol.style.Stroke({
-          color: '#ff0',
-          width: 1
-        })
-      })
-    })
-  }
-
   export default {
     props: {
       fitView: {
@@ -53,31 +30,77 @@
       return {
         overlays: [],
         track: NaN,
-        style: style['redLineStyle']
+        style: {
+          'redLineStyle' : new ol.style.Style({
+            stroke: new ol.style.Stroke({
+              // color: '#999',
+              color: '#C00',
+              lineDash: dashHandDrawn(),
+              width: 5,
+            })
+          }),
+          'invisibleLineStyle' : new ol.style.Style({
+            stroke: new ol.style.Stroke({
+              // color: '#999',
+              color: [255, 255, 255, 0.004],
+              width: 5,
+              opacity: 50
+            })
+          }),
+          'point': new ol.style.Style({
+            image: new ol.style.Circle({
+              fill: new ol.style.Fill({
+                color: 'rgba(255,255,0,0.4)'
+              }),
+              radius: 5,
+              stroke: new ol.style.Stroke({
+                color: '#ff0',
+                width: 1
+              })
+            })
+          })
+        }
       }
     },
     computed: {
-      layer() {
+      trackLayer() {
         return new ol.layer.Vector({
-          source: this.source,
+          source: this.trackSource
         });
       },
-      layer2() {
+      invisibleTrackLayer() {
         return new ol.layer.Vector({
-          source: this.source2,
+          source: this.invisibleTrackSource,
+          layerId: 'invisibleTrackLayer'
         });
       },
-      source() {
+      trackPointsLayer() {
+        return new ol.layer.Vector({
+          source: this.pointsSource,
+          layerId: 'trackPointsLayer'
+        });
+      },
+      trackSource() {
         let elem = this;
         let src = new ol.source.Vector({
           features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(this.track)
         });
         src.forEachFeature(function(feature) {
-          feature.setStyle(elem.style);
+          feature.setStyle(elem.style.redLineStyle);
         })
         return src;
       },
-      source2() {
+      invisibleTrackSource() {
+        let elem = this;
+        let src = new ol.source.Vector({
+          features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(this.track)
+        });
+        src.forEachFeature(function(feature) {
+          feature.setStyle(elem.style.invisibleLineStyle);
+        })
+        return src;
+      },
+      pointsSource() {
         let elem = this;
         let src = new ol.source.Vector({
           features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(this.pointsTrack)
@@ -106,15 +129,27 @@
             pointsCoordinates.push(gjt.toArray(point.geometry))
           }
           elem.track = gjt.toGeoJSON(pointsCoordinates, 'LineString')
-          elem.$parent.addLayer(elem.layer);
+          elem.$parent.addLayer(elem.trackLayer);
+          elem.$parent.addLayer(elem.invisibleTrackLayer);
 
           // Fits the screen to the track
-          let feature = elem.source.getFeatures()[0];
+          let feature = elem.trackSource.getFeatures()[0];
           let polygon = feature.getGeometry();
           elem.$parent.fitView(polygon);
 
           // Draws the pointsTrack layer
-          elem.$parent.addLayer(elem.layer2);
+          elem.$parent.addLayer(elem.trackPointsLayer);
+
+          // Adds hover events to invisibleTrackLayer
+          elem.$parent.addActiveLayer({
+            layerId: 'invisibleTrackLayer',
+            layer: elem.invisibleTrackLayer,
+            mouseOverCallback: function(feature, evt) {
+              let coords = elem.$parent.mapObject.getEventCoordinate(evt.originalEvent)
+              let aux_feat = elem.pointsSource.getClosestFeatureToCoordinate(coords)
+              console.log("La temperatura es", aux_feat.get('temp')+"\u2103")
+            }
+          })
 
           elem.$emit('layerLoaded');
         })

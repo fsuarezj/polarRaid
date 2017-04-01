@@ -64,7 +64,8 @@
             "type": "Feature",
             "properties": {
                 "name": "Rovaniemi",
-                "time": "2017-02-23T02:52:11Z"
+                "time": "2017-02-23T02:52:11Z",
+                "temp": 1
             },
             "geometry": {
                 "type": "Point",
@@ -77,7 +78,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T07:58:22Z"
+                "time": "2017-02-23T07:58:22Z",
+                "temp": 36
             },
             "geometry": {
                 "type": "Point",
@@ -90,7 +92,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T10:25:02Z"
+                "time": "2017-02-23T10:25:02Z",
+                "temp": 35
             },
             "geometry": {
                 "type": "Point",
@@ -103,7 +106,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T13:55:16Z"
+                "time": "2017-02-23T13:55:16Z",
+                "temp": 34
             },
             "geometry": {
                 "type": "Point",
@@ -116,7 +120,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T19:59:17Z"
+                "time": "2017-02-23T19:59:17Z",
+                "temp": 33
             },
             "geometry": {
                 "type": "Point",
@@ -129,7 +134,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-24T02:58:48Z"
+                "time": "2017-02-24T02:58:48Z",
+                "temp": 32
             },
             "geometry": {
                 "type": "Point",
@@ -142,7 +148,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-24T06:49:46Z"
+                "time": "2017-02-24T06:49:46Z",
+                "temp": 31
             },
             "geometry": {
                 "type": "Point",
@@ -155,7 +162,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-24T14:55:25Z"
+                "time": "2017-02-24T14:55:25Z",
+                "temp": 30
             },
             "geometry": {
                 "type": "Point",
@@ -168,7 +176,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-24T19:16:18Z"
+                "time": "2017-02-24T19:16:18Z",
+                "temp": 29
             },
             "geometry": {
                 "type": "Point",
@@ -181,7 +190,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-24T21:33:19Z"
+                "time": "2017-02-24T21:33:19Z",
+                "temp": 28
             },
             "geometry": {
                 "type": "Point",
@@ -194,7 +204,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-25T05:48:35Z"
+                "time": "2017-02-25T05:48:35Z",
+                "temp": 27
             },
             "geometry": {
                 "type": "Point",
@@ -207,7 +218,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-25T11:33:23Z"
+                "time": "2017-02-25T11:33:23Z",
+                "temp": 26
             },
             "geometry": {
                 "type": "Point",
@@ -221,7 +233,8 @@
             "type": "Feature",
             "properties": {
                 "name": "Inari",
-                "time": "2017-02-25T15:24:40Z"
+                "time": "2017-02-25T15:24:40Z",
+                "temp": 25
             },
             "geometry": {
                 "type": "Point",
@@ -234,7 +247,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T04:08:48Z"
+                "time": "2017-02-23T04:08:48Z",
+                "temp": 24
             },
             "geometry": {
                 "type": "Point",
@@ -247,7 +261,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T08:54:24Z"
+                "time": "2017-02-23T08:54:24Z",
+                "temp": 23
             },
             "geometry": {
                 "type": "Point",
@@ -260,7 +275,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T12:42:20Z"
+                "time": "2017-02-23T12:42:20Z",
+                "temp": 22
             },
             "geometry": {
                 "type": "Point",
@@ -274,7 +290,8 @@
             "type": "Feature",
             "properties": {
                 "name": "Karasjok",
-                "time": "2017-02-24T00:03:28Z"
+                "time": "2017-02-24T00:03:28Z",
+                "temp": 21
             },
             "geometry": {
                 "type": "Point",
@@ -287,7 +304,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-24T08:37:54Z"
+                "time": "2017-02-24T08:37:54Z",
+                "temp": 20
             },
             "geometry": {
                 "type": "Point",
@@ -301,7 +319,8 @@
             "type": "Feature",
             "properties": {
                 "name": "Lakselv",
-                "time": "2017-02-24T13:45:21Z"
+                "time": "2017-02-24T13:45:21Z",
+                "temp": 19
             },
             "geometry": {
                 "type": "Point",
@@ -314,7 +333,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T04:07:16Z"
+                "time": "2017-02-23T04:07:16Z",
+                "temp": 18
             },
             "geometry": {
                 "type": "Point",
@@ -327,7 +347,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T07:08:51Z"
+                "time": "2017-02-23T07:08:51Z",
+                "temp": 17
             },
             "geometry": {
                 "type": "Point",
@@ -340,7 +361,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T08:52:28Z"
+                "time": "2017-02-23T08:52:28Z",
+                "temp": 16
             },
             "geometry": {
                 "type": "Point",
@@ -353,7 +375,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T13:03:46Z"
+                "time": "2017-02-23T13:03:46Z",
+                "temp": 15
             },
             "geometry": {
                 "type": "Point",
@@ -366,7 +389,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T14:10:59Z"
+                "time": "2017-02-23T14:10:59Z",
+                "temp": 14
             },
             "geometry": {
                 "type": "Point",
@@ -379,7 +403,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-24T00:41:30Z"
+                "time": "2017-02-24T00:41:30Z",
+                "temp": 13
             },
             "geometry": {
                 "type": "Point",
@@ -392,7 +417,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-24T01:44:44Z"
+                "time": "2017-02-24T01:44:44Z",
+                "temp": 12
             },
             "geometry": {
                 "type": "Point",
@@ -405,7 +431,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-24T03:04:41Z"
+                "time": "2017-02-24T03:04:41Z",
+                "temp": 11
             },
             "geometry": {
                 "type": "Point",
@@ -418,7 +445,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-24T03:57:06Z"
+                "time": "2017-02-24T03:57:06Z",
+                "temp": 10
             },
             "geometry": {
                 "type": "Point",
@@ -431,7 +459,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-24T05:33:51Z"
+                "time": "2017-02-24T05:33:51Z",
+                "temp": 9
             },
             "geometry": {
                 "type": "Point",
@@ -445,7 +474,8 @@
             "type": "Feature",
             "properties": {
                 "name": "Honningsvag",
-                "time": "2017-02-24T06:00:01Z"
+                "time": "2017-02-24T06:00:01Z",
+                "temp": 8
             },
             "geometry": {
                 "type": "Point",
@@ -458,7 +488,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T03:40:45Z"
+                "time": "2017-02-23T03:40:45Z",
+                "temp": 7
             },
             "geometry": {
                 "type": "Point",
@@ -471,7 +502,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T04:05:45Z"
+                "time": "2017-02-23T04:05:45Z",
+                "temp": 6
             },
             "geometry": {
                 "type": "Point",
@@ -484,7 +516,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T05:24:07Z"
+                "time": "2017-02-23T05:24:07Z",
+                "temp": 5
             },
             "geometry": {
                 "type": "Point",
@@ -497,7 +530,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T06:20:58Z"
+                "time": "2017-02-23T06:20:58Z",
+                "temp": 4
             },
             "geometry": {
                 "type": "Point",
@@ -510,7 +544,8 @@
         {
             "type": "Feature",
             "properties": {
-                "time": "2017-02-23T07:07:18Z"
+                "time": "2017-02-23T07:07:18Z",
+                "temp": 3
             },
             "geometry": {
                 "type": "Point",
@@ -524,7 +559,8 @@
             "type": "Feature",
             "properties": {
                 "name": "Cabo Norte",
-                "time": "2017-02-23T08:30:12Z"
+                "time": "2017-02-23T08:30:12Z",
+                "temp": 2
             },
             "geometry": {
                 "type": "Point",

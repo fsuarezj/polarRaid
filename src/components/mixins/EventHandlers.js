@@ -17,7 +17,7 @@ export const eventHandlers = {
     },
     addActiveLayer(layerProps) {
       if (layerProps.layerId in this.activeLayers) {
-        console.error('layerId already used')
+        console.error('layerId with value "', layerProps.layerId, '" already used')
       } else {
         this.activeLayers[layerProps.layerId] = {
           'layer': layerProps.layer,
@@ -49,7 +49,7 @@ export const eventHandlers = {
             // If there is a mouseOverCallback calls it
             if (elem.activeLayers[layer.get('layerId')].mouseOverCallback) {
               if (!elem.mouseIsAlreadyOver(feature)) {
-                elem.activeLayers[layer.get('layerId')].mouseOverCallback(feature)
+                elem.activeLayers[layer.get('layerId')].mouseOverCallback(feature, evt)
                 // If there is a mouseOutCallback include it in the list
                 if (elem.activeLayers[layer.get('layerId')].mouseOutCallback) {
                     elem.mouseOverFeatures.push({
@@ -87,7 +87,7 @@ export const eventHandlers = {
           hit = true
           // If there is a clickCallback calls it
           if (elem.activeLayers[layer.get('layerId')].clickCallback) {
-              elem.activeLayers[layer.get('layerId')].clickCallback(feature)
+              elem.activeLayers[layer.get('layerId')].clickCallback(feature, evt)
           }
         },
         {
