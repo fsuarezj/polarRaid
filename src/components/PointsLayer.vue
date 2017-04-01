@@ -12,11 +12,6 @@
 
   export default {
     mixins: [geojsonLayerBase],
-    props: {
-      layerId: {
-        required: true
-      }
-    },
     data() {
       return {
         styleIcons: {

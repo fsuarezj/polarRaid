@@ -1,6 +1,11 @@
 import ol from "openlayers"
 
 export const geojsonLayerBase = {
+    props: {
+      layerId: {
+        required: true
+      }
+    },
   computed: {
     layer() {
       return new ol.layer.Vector({
