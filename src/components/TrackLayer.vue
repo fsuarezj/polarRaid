@@ -47,14 +47,14 @@
               opacity: 50
             })
           }),
-          'point': new ol.style.Style({
+          'invisiblePointStyle': new ol.style.Style({
             image: new ol.style.Circle({
               fill: new ol.style.Fill({
-                color: 'rgba(255,255,0,0.4)'
+                color: 'rgba(0,0,0,0)'
               }),
               radius: 5,
               stroke: new ol.style.Stroke({
-                color: '#ff0',
+                color: 'rgba(0,0,0,0)',
                 width: 1
               })
             })
@@ -105,6 +105,9 @@
         let src = new ol.source.Vector({
           features: (new ol.format.GeoJSON({featureProjection: 'EPSG:3857'})).readFeatures(this.pointsTrack)
         });
+        src.forEachFeature(function(feature) {
+          feature.setStyle(elem.style.invisiblePointStyle);
+        })
         // src.forEachFeature(function(feature) {
         //   feature.setStyle(elem.style);
         // })
