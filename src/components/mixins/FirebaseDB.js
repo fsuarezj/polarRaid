@@ -17,7 +17,7 @@ let configPRBeta = {
   messagingSenderId: "609239958081"
 };
 
-let app = Firebase.initializeApp(configTest);
+let app = Firebase.initializeApp(configPRBeta);
 let firebaseDB = app.database();
 
 export const getFirebaseRef = function(ref) {
