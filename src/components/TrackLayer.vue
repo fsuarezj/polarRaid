@@ -128,9 +128,11 @@
           elem.pointsTrack = snapshot.val();
           // Draws linestring track
           let pointsCoordinates = []
-          for (let point of elem.pointsTrack.features) {
-            pointsCoordinates.push(gjt.toArray(point.geometry))
-          }
+          // for (let point of elem.pointsTrack.features) {
+          //   pointsCoordinates.push(gjt.toArray(point.geometry))
+          // }
+          // Get points coordinates to create the lineString
+          Object.keys(elem.pointsTrack.features).map(key => pointsCoordinates.push(gjt.toArray(elem.pointsTrack.features[key].geometry)))
           elem.track = gjt.toGeoJSON(pointsCoordinates, 'LineString')
           elem.$parent.addLayer(elem.trackLayer);
           elem.$parent.addLayer(elem.invisibleTrackLayer);

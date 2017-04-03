@@ -8,7 +8,7 @@ let configTest = {
   messagingSenderId: "282000909832"
 };
 
-let configPolarRaidBeta = {
+let configPRBeta = {
   apiKey: "AIzaSyAFs_c-JhZrYY8RoJtqKcxSIfaZQvJ8VVw",
   authDomain: "polarraid-83d2f.firebaseapp.com",
   databaseURL: "https://polarraid-83d2f.firebaseio.com",
@@ -17,9 +17,9 @@ let configPolarRaidBeta = {
   messagingSenderId: "609239958081"
 };
 
+let app = Firebase.initializeApp(configTest);
+let firebaseDB = app.database();
 
-export const getFirebaseRef = function(ref, config = configTest) {
-  let app = Firebase.initializeApp(config);
-  let firebaseDB = app.database();
+export const getFirebaseRef = function(ref) {
   return firebaseDB.ref(ref);
 }
