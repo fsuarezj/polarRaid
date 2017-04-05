@@ -126,6 +126,7 @@
         })
         .then(function(snapshot) {
           elem.pointsTrack = snapshot.val();
+
           // Draws linestring track
           let pointsCoordinates = []
           // for (let point of elem.pointsTrack.features) {
@@ -142,6 +143,11 @@
           let polygon = feature.getGeometry();
           elem.$parent.fitView(polygon);
 
+          // Creates an auxPointsTrack with a regular (beginning on 0) array of features
+          let aux_features = []
+          Object.keys(elem.pointsTrack.features).map(key => aux_features.push(elem.pointsTrack.features[key]))
+          elem.pointsTrack.features = aux_features
+
           // Draws the pointsTrack layer
           elem.$parent.addLayer(elem.trackPointsLayer);
 
@@ -152,7 +158,14 @@
             mouseOverCallback: function(feature, evt) {
               let coords = elem.$parent.mapObject.getEventCoordinate(evt.originalEvent)
               let aux_feat = elem.pointsSource.getClosestFeatureToCoordinate(coords)
-              console.log("La temperatura es", aux_feat.get('temp')+"\u2103")
+              let temp1 = aux_feat.get('temp1')
+              let temp2 = aux_feat.get('temp2')
+              if (temp1) {
+                console.log("La temperatura del Sensor 1 es", temp1+"\u2103")
+              }
+              if (temp2) {
+                console.log("La temperatura del Sensor 2 es", temp2+"\u2103")
+              }
             }
           })
 
