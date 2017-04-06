@@ -69,7 +69,7 @@ export default {
     background-color: transparent;
     box-shadow: 0px 0px 0px;
     // background-image: url(assets/papel_viejo1.png);
-    background-image: url("http://localhost:8080/src/assets/papel_viejo1.png");
+    background-image: url('~./assets/images/style/papel_viejo1.png');
     text-align: justify;
     width: 100%;
     padding: 40px;
